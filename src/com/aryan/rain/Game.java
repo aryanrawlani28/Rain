@@ -55,6 +55,15 @@ public class Game extends Canvas implements Runnable{
             createBufferStrategy(3);
             return;
         }
+
+        Graphics g = bs.getDrawGraphics();
+
+        g.setColor(Color.BLACK);
+        g.fillRect(0,0,getWidth(), getHeight());
+
+        g.dispose();
+
+        bs.show();
     }
 
     public static void main(String[] args){
