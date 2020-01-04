@@ -2,6 +2,7 @@ package com.aryan.rain;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable{
 
@@ -39,8 +40,20 @@ public class Game extends Canvas implements Runnable{
 
     public void run(){
         while (running){
-            // game elements
-            System.out.println("Running the game!");
+            update();
+            render();
+        }
+    }
+
+    public void update(){
+        // Logic
+    }
+
+    public void render(){
+        BufferStrategy bs = getBufferStrategy();
+        if(bs == null){
+            createBufferStrategy(3);
+            return;
         }
     }
 
@@ -55,7 +68,6 @@ public class Game extends Canvas implements Runnable{
         game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         game.frame.setLocationRelativeTo(null);
         game.frame.setVisible(true);
-        // game.frame.setPreferredSize();
 
         game.start();
 
