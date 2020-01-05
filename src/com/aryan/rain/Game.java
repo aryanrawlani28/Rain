@@ -11,7 +11,7 @@ import java.awt.image.DataBufferInt;
 public class Game extends Canvas implements Runnable{
 
     public static int width = 300;
-    public static int height = width / 16 * 9;
+    public static int height = width / 16 * 9; //Width: 168
     public static int scale = 3;
 
     private JFrame frame;
@@ -67,7 +67,7 @@ public class Game extends Canvas implements Runnable{
             createBufferStrategy(3);
             return;
         }
-
+        screen.clear();
         screen.render();
 
         for(int i=0; i<pixels.length; i++){

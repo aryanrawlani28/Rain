@@ -10,7 +10,13 @@ public class Screen {
         this.width = width;
         this.height = height;
 
-        pixels = new int[width*height];
+        pixels = new int[width*height]; // 50,400 Size [0, 50399]
+    }
+
+    public void clear(){
+        for(int i=0; i<pixels.length; i++){
+            pixels[i] = 0;
+        }
     }
 
     public void render(){
