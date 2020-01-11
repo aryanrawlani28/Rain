@@ -1,6 +1,7 @@
 package com.aryan.rain;
 
 import com.aryan.rain.graphics.Screen;
+import com.aryan.rain.input.Keyboard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +18,8 @@ public class Game extends Canvas implements Runnable{
     public static String title = "Rain";
 
     private JFrame frame;
+
+    private Keyboard key;
 
     private Thread thread;
 
@@ -35,6 +38,9 @@ public class Game extends Canvas implements Runnable{
         screen = new Screen(width, height);
 
         frame = new JFrame();
+
+        key = new Keyboard();
+        addKeyListener(key);
     }
 
     private synchronized void start(){
@@ -90,6 +96,7 @@ public class Game extends Canvas implements Runnable{
 
     public void update(){
         // Logic
+        key.update();
         x++;
         y++;
     }
@@ -131,6 +138,7 @@ public class Game extends Canvas implements Runnable{
         game.frame.setVisible(true);
 
         game.start();
+        game.requestFocus();
 
     }
 
