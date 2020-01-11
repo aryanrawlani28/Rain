@@ -37,7 +37,7 @@ public class Screen {
         for(int y=0; y < height; y++){
 
             //yy is the duplicate of y, we don't wanna change rendering area, we need to move the tile index
-            int yy = y;
+            int yy = y + yOffset;
 
             // when goes out of bounds, break.
             //if(yy < 0 || yy > height) break;

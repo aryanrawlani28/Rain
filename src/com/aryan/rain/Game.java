@@ -87,6 +87,7 @@ public class Game extends Canvas implements Runnable{
         }
     }
     int x = 0, y = 0;
+
     public void update(){
         // Logic
         x++;
