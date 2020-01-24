@@ -4,6 +4,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+// This loads entire sheet, but what about individual sprites? I create another class for this.
+
 public class SpriteSheet {
     // Specify path:
 
@@ -11,7 +13,7 @@ public class SpriteSheet {
 
     private String path; //Path to spritsheet
 
-    private final int SIZE;
+    public final int SIZE;
 
     public int[] pixels;
 
