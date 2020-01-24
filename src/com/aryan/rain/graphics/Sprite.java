@@ -12,6 +12,9 @@ public class Sprite {
     private SpriteSheet sheet;
 
 
+    // Sprites are static. Once defined, they stay the same. Sprite.grass would give us all we need.
+    public static Sprite grass = new Sprite(16,0,0,null);
+
 
     // Even tho we have 16px sprites, monsters, etc can be big. So they can be bigger.
 
@@ -38,5 +41,5 @@ public class Sprite {
         }
     }
 
-    
+
 }
