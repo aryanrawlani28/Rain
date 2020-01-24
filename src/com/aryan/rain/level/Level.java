@@ -1,16 +1,17 @@
 package com.aryan.rain.level;
 
-// L1: Random gen
+// L1: Random gen (Noise mapping - advanced)
 // L2: Map level
 
 import com.aryan.rain.graphics.Screen;
 
 public class Level {
 
-    private int width, height; // Primarily for L1
-    private int[] tiles;
+    protected int width, height; // Primarily for L1
+    protected int[] tiles;  // Eg tiles[1] is grass, 2 is stone, etc..
 
     public Level(int width, int height){
+        // L1
         this.width = width;
         this.height = height;
 
@@ -20,10 +21,11 @@ public class Level {
     }
 
     public Level(String path){
+        // L2
         loadLevel(path);
     }
 
-    private void generateLevel() {
+    protected void generateLevel() {
 
     }
 
