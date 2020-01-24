@@ -2,7 +2,7 @@ package com.aryan.rain.graphics;
 
 public class Sprite {
 
-    private final int SIZE;     // Size of particular sprite
+    public final int SIZE;     // Size of particular sprite
 
     // X, y are coords of individual sprites.
     private  int x,y;
@@ -13,7 +13,7 @@ public class Sprite {
 
 
     // Sprites are static. Once defined, they stay the same. Sprite.grass would give us all we need.
-    public static Sprite grass = new Sprite(16,0,0,null);
+    public static Sprite grass = new Sprite(16,0,0, SpriteSheet.tiles);
 
 
     // Even tho we have 16px sprites, monsters, etc can be big. So they can be bigger.

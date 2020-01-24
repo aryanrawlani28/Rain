@@ -51,7 +51,7 @@ public class Screen {
                 // Everytime xx / 16, becomes bigger than 63, go to zero again.
                 tileIndex = ((xx >> 4) & MAP_SIZE_MASK) + ((yy >> 4) & MAP_SIZE_MASK) * MAP_SIZE;
 
-                pixels[x + y * width] = tiles[tileIndex];
+                pixels[x + y * width] = Sprite.grass.pixels[(x&15) + (y&15) * Sprite.grass.SIZE];
             }
         }
     }
