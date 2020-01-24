@@ -1,5 +1,7 @@
 package com.aryan.rain.graphics;
 
+import com.aryan.rain.level.tile.Tile;
+
 import java.util.Random;
 
 public class Screen {
@@ -49,4 +51,13 @@ public class Screen {
             }
         }
     }
+
+
+    public void renderTile(int xp, int yp, Tile tile){
+        for (int y = 0; y < tile.sprite.SIZE; y++){ //mostly tile size is 16. if increase size in future, no probs this way.
+            int ya = y + yp;
+        }
+    }
+
+
 }
