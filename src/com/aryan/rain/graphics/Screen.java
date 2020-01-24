@@ -31,27 +31,21 @@ public class Screen {
     }
 
     public void render(int xOffset, int yOffset){
-        int tileIndex;
-
         // Height: 300px & Width: 168px.
+
+        int yp, xp;
+
         for(int y=0; y < height; y++){
-
-            //yy is the duplicate of y, we don't wanna change rendering area, we need to move the tile index
-            int yy = y + yOffset;
-
-            // when goes out of bounds, break.
-            //if(yy < 0 || yy > height) break;
-
+            yp = y + yOffset;
+            if(yp < 0 || yp >= height) continue;
 
             for(int x=0; x < width; x++){
-                int xx = x + xOffset;
 
-                //if(xx < 0 || xx > width) break;
+                xp = x + xOffset;
+                if(xp < 0 || xp >= width) continue;
+                // At the moment, it doesn't really work as intended.
+                pixels[xp + yp * width] = Sprite.grass.pixels[(x&15) + (y&15) * Sprite.grass.SIZE];
 
-                // Everytime xx / 16, becomes bigger than 63, go to zero again.
-                tileIndex = ((xx >> 4) & MAP_SIZE_MASK) + ((yy >> 4) & MAP_SIZE_MASK) * MAP_SIZE;
-
-                pixels[x + y * width] = Sprite.grass.pixels[(x&15) + (y&15) * Sprite.grass.SIZE];
             }
         }
     }
