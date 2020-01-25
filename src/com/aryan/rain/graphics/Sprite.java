@@ -19,8 +19,8 @@ public class Sprite {
 
     public static Sprite player_forward = new Sprite(32, 0, 5, SpriteSheet.tiles);
     public static Sprite player_back = new Sprite(32, 2, 5, SpriteSheet.tiles);
-    public static Sprite player_left = new Sprite(32, 3, 5, SpriteSheet.tiles);
-    public static Sprite player_right = new Sprite(32, 1, 5, SpriteSheet.tiles);
+
+    public static Sprite player_side = new Sprite(32, 1, 5, SpriteSheet.tiles);
 
     // Even tho we have 16px sprites, monsters, etc can be big. So they can be bigger.
     public Sprite(int size, int x, int y, SpriteSheet sheet){
