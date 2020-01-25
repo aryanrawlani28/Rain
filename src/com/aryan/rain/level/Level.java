@@ -56,6 +56,11 @@ public class Level {
         int y0 = yScroll >> 4;                          // y0 is the top
         int y1 = yScroll + screen.height >> 4;          // y1 is bottom
 
+        for (int y = y0; y < y1; y++){
+            for (int x = x0; x < x1; x++){
+                getTile(x, y).render(x, y, screen);
+            }
+        }
     }
 
     // We will render what this method returns
