@@ -74,8 +74,11 @@ public class Screen {
                 }
                 if (xa < 0) xa = 0;
 
-                pixels[xa + ya * width] = sprite.pixels[x+y*16];
-
+                int col = sprite.pixels[x+y*16];
+                System.out.println(col);
+                if (col != -65281) {
+                    pixels[xa + ya * width] = col;
+                }
             }
         }
     }
