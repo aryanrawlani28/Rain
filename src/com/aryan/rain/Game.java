@@ -1,5 +1,6 @@
 package com.aryan.rain;
 
+import com.aryan.rain.entity.mob.Player;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.level.Level;
@@ -25,6 +26,8 @@ public class Game extends Canvas implements Runnable{
 
     private Level level;                        // Only load one level at a time.
 
+    private Player player;
+
     private Thread thread;
 
     private boolean running = false;
@@ -46,6 +49,8 @@ public class Game extends Canvas implements Runnable{
         key = new Keyboard();
 
         level = new RandomLevel(64, 64);
+
+        player = new Player(key);
         addKeyListener(key);
     }
 
@@ -98,16 +103,17 @@ public class Game extends Canvas implements Runnable{
             }
         }
     }
-    int x = 0, y = 0;
+//    int x = 0, y = 0;
 
     public void update(){
         // Logic
         key.update();
+        player.update();
 
-        if(key.up) y--;
-        if(key.down) y++;
-        if(key.left) x--;
-        if(key.right) x++;
+//        if(key.up) y--;
+//        if(key.down) y++;
+//        if(key.left) x--;
+//        if(key.right) x++;
     }
 
     public void render(){
@@ -117,8 +123,7 @@ public class Game extends Canvas implements Runnable{
             return;
         }
         screen.clear();
-        // screen.render(x, y); // Now: Render levels.
-        level.render(x, y, screen);
+        level.render(player.x, player.y, screen);
 
         for(int i=0; i<pixels.length; i++){
             pixels[i] = screen.pixels[i];
