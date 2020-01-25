@@ -21,6 +21,9 @@ public class Mob extends Entity {
         return false;
     }
 
+    public void render(){
+
+    }
 }
 
 // TODO: Add lightning support.
