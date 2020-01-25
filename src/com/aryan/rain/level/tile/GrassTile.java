@@ -9,7 +9,6 @@ public class GrassTile extends Tile {
     }
 
     public void render(int x, int y, Screen screen){
-        // Rendering of the tiles.
         // x,y are in pixels. need to apply math ops to adjust
         screen.renderTile(x, y, this);
     }

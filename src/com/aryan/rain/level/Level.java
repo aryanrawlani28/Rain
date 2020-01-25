@@ -43,8 +43,13 @@ public class Level {
         // change level and stuff based on time.
     }
 
-
+    //this method and vars define the render region
     public void render(int xScroll, int yScroll, Screen screen){
         // as fast as possible. probably empty here.
+        // Corner pins: rendering is done from top left to top right
+        int x0 = xScroll >> 4; // x0 is the inmost x coord.. left side of the screen.
+        int x1 = (xScroll + screen.width) >> 4; // x1 is the right side of the screen
+        int y0 = yScroll >> 4; // y0 is the top
+        int y1 = yScroll + screen.height >> 4; // y1 is bottom
     }
 }

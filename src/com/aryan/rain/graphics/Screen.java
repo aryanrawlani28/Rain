@@ -5,8 +5,8 @@ import com.aryan.rain.level.tile.Tile;
 import java.util.Random;
 
 public class Screen {
-    private int width;
-    private int height;
+    public int width;
+    public int height;
 
     public int[] pixels;
 
