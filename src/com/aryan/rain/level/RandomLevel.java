@@ -3,6 +3,9 @@ package com.aryan.rain.level;
 import java.util.Random;
 
 // Since we don't have a def constructor, we need one!
+
+// we need to have a get tile method. ex if 2, grass rendered, etc.
+
 public class RandomLevel extends Level{
 
     private final Random random = new Random();
