@@ -14,7 +14,7 @@ public class Sprite {
 
     // Sprites are static. Once defined, they stay the same. Sprite.grass would give us all we need.
     public static Sprite grass = new Sprite(16,0,0, SpriteSheet.tiles);
-    public static Sprite voidTile = new Sprite(16, 0);  // 0 is black. 0xffffff is white.
+    public static Sprite voidTile = new Sprite(16, 0x339BF5);  // 0 is black. 0xffffff is white.
 
 
     // Even tho we have 16px sprites, monsters, etc can be big. So they can be bigger.

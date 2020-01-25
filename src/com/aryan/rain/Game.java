@@ -2,6 +2,8 @@ package com.aryan.rain;
 
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.input.Keyboard;
+import com.aryan.rain.level.Level;
+import com.aryan.rain.level.RandomLevel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +22,8 @@ public class Game extends Canvas implements Runnable{
     private JFrame frame;
 
     private Keyboard key;
+
+    private Level level;                        // Only load one level at a time.
 
     private Thread thread;
 
@@ -40,6 +44,8 @@ public class Game extends Canvas implements Runnable{
         frame = new JFrame();
 
         key = new Keyboard();
+
+        level = new RandomLevel(64, 64);
         addKeyListener(key);
     }
 
@@ -111,7 +117,8 @@ public class Game extends Canvas implements Runnable{
             return;
         }
         screen.clear();
-        screen.render(x, y);
+        // screen.render(x, y); // Now: Render levels.
+        level.render(x, y, screen);
 
         for(int i=0; i<pixels.length; i++){
             pixels[i] = screen.pixels[i];
