@@ -66,9 +66,10 @@ public class Screen {
             for (int x = 0; x < tile.sprite.SIZE; x++){                 // same thing for x.
 
                 int xa = x + xp;                                        // xa = x absolute
-                if (xa < 0 || xa >= width || ya < 0 || ya >= width){    // maps are going to be infinite? (Come back to this later #29) are easier?
+                if (xa < -tile.sprite.SIZE || xa >= width || ya < 0 || ya >= height){    // maps are going to be infinite? (Come back to this later #29) are easier?
                     break;
                 }
+                if (xa < 0) xa = 0;
 
                 pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
 
