@@ -52,10 +52,17 @@ public class Screen {
         }
     }
 
-
+// Make sure to render only what we need.
     public void renderTile(int xp, int yp, Tile tile){
         for (int y = 0; y < tile.sprite.SIZE; y++){ //mostly tile size is 16. if increase size in future, no probs this way.
             int ya = y + yp;
+            for (int x = 0; x < tile.sprite.SIZE; x++){ // same thing for x.
+                int xa = x + xp; // xa = x absolute
+                if (xa < 0 || xa >= width || ya < 0 || ya >= width){    // maps are going to be infinite? (Come back to this later #29) are easier?
+                    break;
+                }
+                pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
+            }
         }
     }
 
