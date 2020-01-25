@@ -46,6 +46,7 @@ public class Level {
 
     //this method and vars define the render region
     public void render(int xScroll, int yScroll, Screen screen){
+        screen.setOffset(xScroll, yScroll);
 
         // as fast as possible. probably empty here.
         // Corner pins: rendering is done from top left to top right

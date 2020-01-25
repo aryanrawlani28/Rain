@@ -13,6 +13,8 @@ public class Screen {
     private final int MAP_SIZE = 8;
     private final int MAP_SIZE_MASK = MAP_SIZE - 1;
 
+    public int xOffset, yOffset;
+
     public int[] tiles = new int[MAP_SIZE*MAP_SIZE];
     public Random random = new Random();
 
@@ -52,12 +54,17 @@ public class Screen {
         }
     }
 
-// Make sure to render only what we need.
+    // Make sure to render only what we need. Also, when we move right -> player moves right but map should move to left.
     public void renderTile(int xp, int yp, Tile tile){
-        for (int y = 0; y < tile.sprite.SIZE; y++){ //mostly tile size is 16. if increase size in future, no probs this way.
+        xp -= xOffset;
+        yp -= yOffset;
+        for (int y = 0; y < tile.sprite.SIZE; y++){                     //mostly tile size is 16. if increase size in future, no probs this way.
+
             int ya = y + yp;
-            for (int x = 0; x < tile.sprite.SIZE; x++){ // same thing for x.
-                int xa = x + xp; // xa = x absolute
+
+            for (int x = 0; x < tile.sprite.SIZE; x++){                 // same thing for x.
+
+                int xa = x + xp;                                        // xa = x absolute
                 if (xa < 0 || xa >= width || ya < 0 || ya >= width){    // maps are going to be infinite? (Come back to this later #29) are easier?
                     break;
                 }
@@ -66,5 +73,9 @@ public class Screen {
         }
     }
 
+    public void setOffset(int xOffset, int yOffset){
+        this.xOffset = xOffset;
+        this.yOffset = yOffset;
+    }
 
 }
