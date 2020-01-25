@@ -14,6 +14,7 @@ public class Tile {
     public Sprite sprite;
 
     public static Tile grass = new GrassTile(Sprite.grass); // Polymorphism.
+    public static Tile voidTile = new VoidTile();
 
     Tile(Sprite sprite){
         this.sprite = sprite;

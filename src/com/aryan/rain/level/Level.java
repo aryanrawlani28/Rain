@@ -62,6 +62,6 @@ public class Level {
 
         if (tiles[x+y*width] == 0) return Tile.grass;
 
-        return null;                                    // Bad idea, TODO: Change this. Create a void tile.
+        return Tile.voidTile;
     }
 }
