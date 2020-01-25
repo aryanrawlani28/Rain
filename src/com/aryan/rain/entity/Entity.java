@@ -5,6 +5,8 @@ import com.aryan.rain.level.Level;
 
 import java.util.Random;
 
+
+// A Entity doesn't necessarily have sprites.
 public abstract class Entity {
     public int x, y;
     private boolean removed = false;
