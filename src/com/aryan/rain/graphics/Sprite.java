@@ -22,6 +22,8 @@ public class Sprite {
     public static Sprite player2 = new Sprite(16, 0, 11, SpriteSheet.tiles);
     public static Sprite player3 = new Sprite(16, 1, 11, SpriteSheet.tiles);
 
+    public static Sprite player = new Sprite(32, 0, 5, SpriteSheet.tiles);
+
 
     // Even tho we have 16px sprites, monsters, etc can be big. So they can be bigger.
     public Sprite(int size, int x, int y, SpriteSheet sheet){
