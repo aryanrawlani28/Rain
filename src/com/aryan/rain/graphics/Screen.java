@@ -1,5 +1,6 @@
 package com.aryan.rain.graphics;
 
+import com.aryan.rain.entity.mob.Player;
 import com.aryan.rain.level.tile.Tile;
 
 import java.util.Random;
@@ -52,6 +53,28 @@ public class Screen {
                 if (xa < 0) xa = 0;
 
                 pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
+
+            }
+        }
+    }
+
+    public void renderPlayer(int xp, int yp, Sprite sprite){
+        xp -= xOffset;
+        yp -= yOffset;
+
+        for (int y = 0; y < 16; y++){                     //mostly tile size is 16. if increase size in future, no probs this way.
+
+            int ya = y + yp;
+
+            for (int x = 0; x < 16; x++){                 // same thing for x.
+
+                int xa = x + xp;                                        // xa = x absolute
+                if (xa < -16 || xa >= width || ya < 0 || ya >= height){    // maps are going to be infinite? (Come back to this later #29) are easier?
+                    break;
+                }
+                if (xa < 0) xa = 0;
+
+                pixels[xa + ya * width] = sprite.pixels[x+y*16];
 
             }
         }

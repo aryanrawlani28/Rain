@@ -1,6 +1,10 @@
 package com.aryan.rain.entity.mob;
 
+import com.aryan.rain.graphics.Screen;
+import com.aryan.rain.graphics.Sprite;
 import com.aryan.rain.input.Keyboard;
+
+import java.util.Scanner;
 
 public class Player extends Mob {
 
@@ -33,7 +37,8 @@ public class Player extends Mob {
         }
     }
 
-    public void render(){
-
+    // You don't wanna center it always to the player.
+    public void render(Screen screen){
+        screen.renderPlayer(x, y, Sprite.player0);
     }
 }
