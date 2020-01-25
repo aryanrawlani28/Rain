@@ -5,6 +5,7 @@ package com.aryan.rain.level.tile;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.Sprite;
 
+// Will be a template aka abstract in future maybe.
 public class Tile {
     // even if we have a null sprite -> something should be rendered.
     // collideable?

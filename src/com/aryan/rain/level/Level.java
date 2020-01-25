@@ -5,6 +5,7 @@ package com.aryan.rain.level;
 
 import com.aryan.rain.graphics.Screen;
 
+// Manages which tiles need to be rendered.
 public class Level {
 
     protected int width, height; // Primarily for L1
@@ -44,6 +45,6 @@ public class Level {
 
 
     public void render(int xScroll, int yScroll, Screen screen){
-        // as fast as possible. probably empty here
+        // as fast as possible. probably empty here.
     }
 }
