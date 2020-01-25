@@ -34,26 +34,6 @@ public class Screen {
         }
     }
 
-//    public void render(int xOffset, int yOffset){
-//        // Height: 300px & Width: 168px.
-//
-//        int yp, xp;
-//
-//        for(int y=0; y < height; y++){
-//            yp = y + yOffset;
-//            if(yp < 0 || yp >= height) continue;
-//
-//            for(int x=0; x < width; x++){
-//
-//                xp = x + xOffset;
-//                if(xp < 0 || xp >= width) continue;
-//                // At the moment, it doesn't really work as intended.
-//                pixels[xp + yp * width] = Sprite.grass.pixels[(x&15) + (y&15) * Sprite.grass.SIZE];
-//
-//            }
-//        }
-//    }
-
     // Make sure to render only what we need. Also, when we move right -> player moves right but map should move to left.
     public void renderTile(int xp, int yp, Tile tile){
         xp -= xOffset;

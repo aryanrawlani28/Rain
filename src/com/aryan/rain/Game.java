@@ -15,7 +15,7 @@ import java.awt.image.DataBufferInt;
 public class Game extends Canvas implements Runnable{
 
     public static int width = 300;
-    public static int height = width / 16 * 9; //Width: 168
+    public static int height = width / 16 * 9;      // Width: 168
     public static int scale = 3;
 
     public static String title = "Rain";
@@ -24,7 +24,7 @@ public class Game extends Canvas implements Runnable{
 
     private Keyboard key;
 
-    private Level level;                        // Only load one level at a time.
+    private Level level;                            // Only load one level at a time.
 
     private Player player;
 
@@ -94,26 +94,19 @@ public class Game extends Canvas implements Runnable{
             render();
             frames++;
 
-            if(System.currentTimeMillis() - timer > 1000){ //Happens once per second.
+            if(System.currentTimeMillis() - timer > 1000){      // Happens once per second.
                 timer+=1000;
-                //System.out.println(updates + "ups" + frames + " fps");
+
                 frame.setTitle(title + " | " + updates + " ups, " + frames + " fps");
                 frames = 0;
                 updates = 0;
             }
         }
     }
-//    int x = 0, y = 0;
 
     public void update(){
-        // Logic
         key.update();
         player.update();
-
-//        if(key.up) y--;
-//        if(key.down) y++;
-//        if(key.left) x--;
-//        if(key.right) x++;
     }
 
     public void render(){
