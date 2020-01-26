@@ -13,6 +13,7 @@ public class Level {
     protected int[] tilesInt;                          // Eg tiles[1] is grass, 2 is stone, etc..
     protected Tile[] tiles;   // Slow, but precise.
 
+    // Used when we generate a random level
     public Level(int width, int height){
         // L1
         this.width = width;
@@ -26,6 +27,7 @@ public class Level {
     public Level(String path){
         // L2
         loadLevel(path);
+        generateLevel();
     }
 
     protected void generateLevel() {
@@ -60,7 +62,10 @@ public class Level {
         for (int y = y0; y < y1; y++){
             for (int x = x0; x < x1; x++){
                 // getTile(x, y).render(x, y, screen);
-                if (x < 0 || y < 0 || x >= width || y >= height) Tile.voidTile.render(x, y, screen);
+                if (x+y*16 < 0 || x + y * 16 >= 256){
+                    Tile.voidTile.render(x, y, screen);
+                    continue;
+                }
                 tiles[x+y*16].render(x, y, screen);
             }
         }
