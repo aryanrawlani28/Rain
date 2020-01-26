@@ -20,7 +20,7 @@ public class Tile {
 
     public static Tile voidTile = new VoidTile(Sprite.voidTile);
 
-    Tile(Sprite sprite){
+    public Tile(Sprite sprite){
         this.sprite = sprite;
     }
 

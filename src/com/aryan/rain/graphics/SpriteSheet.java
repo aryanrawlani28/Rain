@@ -20,13 +20,14 @@ public class SpriteSheet {
 
     // Since we've now included res as a library - java automatically includes it.
     // Just use the folders/files inside it for path. Size is 256x256.
-    public static SpriteSheet tiles = new SpriteSheet("res/textures/spritesheet.png", 256);
+    public static SpriteSheet tiles = new SpriteSheet("res/textures/sheets/spritesheet.png", 256);
+    public static SpriteSheet spawn_level = new SpriteSheet("res/textures/sheets/spawn_level.png", 48);
 
     public SpriteSheet(String path, int size){
         this.path = path;
         this.SIZE = size;
         pixels = new int[SIZE*SIZE];
-        load("res/textures/spritesheet.png");
+        load("res/textures/sheets/spritesheet.png");
     }
 
     // Load the image file
