@@ -78,7 +78,7 @@ public class Level {
     // We will render what this method returns. This converts arry to tiles.
     public Tile getTile(int x, int y){
 
-        if (x < 0 || y < 0 || x >= width || y >= height) return Tile.spawn_wall1;
+        if (x < 0 || y < 0 || x >= width || y >= height) return Tile.spawn_grass;
 
         if (tiles[x+y*width] == Tile.col_spawn_floor) return Tile.spawn_floor;
         if (tiles[x+y*width] == Tile.col_spawn_grass) return Tile.spawn_grass;
@@ -87,6 +87,6 @@ public class Level {
         if (tiles[x+y*width] == Tile.col_spawn_wall2) return Tile.spawn_wall2;
         if (tiles[x+y*width] == Tile.col_spawn_water) return Tile.spawn_water;
 
-        return Tile.spawn_wall1;
+        return Tile.spawn_grass;
     }
 }

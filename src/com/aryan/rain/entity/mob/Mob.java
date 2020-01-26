@@ -19,8 +19,8 @@ public class Mob extends Entity {
         if (ya < 0) dir = 0;
 
         // If no collision -> can move.
-        if(!collision()) {
-            x += xa;
+        if(!collision(xa, ya)) {
+            x += xa;    // Tile that you are going to be in.
             y += ya;
         }
     }
@@ -29,8 +29,12 @@ public class Mob extends Entity {
 
     }
 
-    private boolean collision(){
+    private boolean collision(int xa, int ya){
+        boolean solid = false;
 
+        if (level.getTile((x+xa)/16, (y+ya)/16).solid()){
+            return true;
+        }
         return false;
     }
 

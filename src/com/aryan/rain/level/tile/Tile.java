@@ -37,7 +37,6 @@ public class Tile {
     public static final int col_spawn_wall1 = 0xFF404040;
     public static final int col_spawn_wall2 = 0xFF000000;
     public static final int col_spawn_floor = 0xFF7F3300;
-    public static final int col_spawn_player = 0xFF4D5863;
 
     /////////////////////////////////////////////////////////////////////////////////////////
 

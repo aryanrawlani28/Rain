@@ -31,8 +31,6 @@ public class Sprite {
     //////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
     public static Sprite voidTile = new Sprite(16, 0x339BF5);       // 0 is black. 0xffffff is white.
 
 
