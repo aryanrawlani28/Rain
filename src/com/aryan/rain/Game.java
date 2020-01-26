@@ -5,6 +5,7 @@ import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.level.Level;
 import com.aryan.rain.level.RandomLevel;
+import com.aryan.rain.level.SpawnLevel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,7 +49,7 @@ public class Game extends Canvas implements Runnable{
 
         key = new Keyboard();
 
-        level = new RandomLevel(64, 64);
+        level = new SpawnLevel("res/textures/level.png");
 
         player = new Player(key);
         addKeyListener(key);

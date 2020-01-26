@@ -10,14 +10,15 @@ import com.aryan.rain.level.tile.Tile;
 public class Level {
 
     protected int width, height;                    // Primarily for L1
-    protected int[] tiles;                          // Eg tiles[1] is grass, 2 is stone, etc..
+    protected int[] tilesInt;                          // Eg tiles[1] is grass, 2 is stone, etc..
+    protected Tile[] tiles;   // Slow, but precise.
 
     public Level(int width, int height){
         // L1
         this.width = width;
         this.height = height;
 
-        tiles = new int[width * height];            // Tile for every square
+        tilesInt = new int[width * height];            // Tile for every square
 
         generateLevel();
     }
@@ -58,19 +59,21 @@ public class Level {
 
         for (int y = y0; y < y1; y++){
             for (int x = x0; x < x1; x++){
-                getTile(x, y).render(x, y, screen);
+                // getTile(x, y).render(x, y, screen);
+                if (x < 0 || y < 0 || x >= width || y >= height) Tile.voidTile.render(x, y, screen);
+                tiles[x+y*16].render(x, y, screen);
             }
         }
     }
 
-    // We will render what this method returns
+    // We will render what this method returns. This converts arry to tiles.
     public Tile getTile(int x, int y){
 
         if (x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
 
-        if (tiles[x+y*width] == 0) return Tile.grass;
-        if (tiles[x+y*width] == 1) return Tile.flower;
-        if (tiles[x+y*width] == 2) return Tile.rock;
+        if (tilesInt[x+y*width] == 0) return Tile.grass;
+        if (tilesInt[x+y*width] == 1) return Tile.flower;
+        if (tilesInt[x+y*width] == 2) return Tile.rock;
 
         return Tile.voidTile;
     }

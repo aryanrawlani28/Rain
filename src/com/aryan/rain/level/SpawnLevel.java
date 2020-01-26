@@ -1,6 +1,5 @@
 package com.aryan.rain.level;
 
-import com.aryan.rain.level.tile.GrassTile;
 import com.aryan.rain.level.tile.Tile;
 
 import javax.imageio.ImageIO;
@@ -9,7 +8,7 @@ import java.io.IOException;
 
 public class SpawnLevel extends Level{
 
-    private Tile[] tiles;   // Slow, but precise.
+
     private int[] levelPixels;
 
     public SpawnLevel(String path) {
@@ -37,8 +36,10 @@ public class SpawnLevel extends Level{
         // Green -> Grass [0xFF00]
         // Yellow -> Flower [0xFFFF00]
         // Brown -> Rock [0x7F7F00]
+
+        // My Green for grass: [0x007F0E]           Infield small grass: [0x00FF21]
         for (int i = 0; i < levelPixels.length; i++) {
-            if (levelPixels[i] == 0xFF00) tiles[i] = Tile.grass;
+            if (levelPixels[i] == 0x007F0E) tiles[i] = Tile.grass;
             if (levelPixels[i] == 0xFFFF00) tiles[i] = Tile.flower;
             if (levelPixels[i] == 0x7F7F00) tiles[i] = Tile.rock;
         }
