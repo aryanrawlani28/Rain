@@ -51,7 +51,7 @@ public class Game extends Canvas implements Runnable{
 
         level = new SpawnLevel("res/textures/level.png");
 
-        player = new Player(key);
+        player = new Player(6*16, 6*16, key);
         addKeyListener(key);
     }
 

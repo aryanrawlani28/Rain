@@ -17,11 +17,12 @@ public class Player extends Mob {
     }
 
     // Sometimes players are created at a specific location.
-    Player(int x, int y, Keyboard input){
+    public Player(int x, int y, Keyboard input){
         this.x = x;
         this.y = y;
 
         this.input = input;
+        sprite = Sprite.player_forward;
     }
 
 

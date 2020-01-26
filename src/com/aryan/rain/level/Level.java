@@ -86,9 +86,9 @@ public class Level {
 
         // My Green for grass: [0xFF007F0E]           Infield small grass: [0xFF00FF21]
 
-        if (tilesInt[x+y*width] == 0xFF007F0E) return Tile.grass;
-        if (tilesInt[x+y*width] == 0xFFFFFF00) return Tile.flower;
-        if (tilesInt[x+y*width] == 0xFFFFFF00) return Tile.rock;
+        if (tiles[x+y*width] == 0xFF007F0E) return Tile.grass;
+        if (tiles[x+y*width] == 0xFFFFFF00) return Tile.flower;
+        if (tiles[x+y*width] == 0xFF7F7F00) return Tile.rock;
 
         return Tile.voidTile;
     }

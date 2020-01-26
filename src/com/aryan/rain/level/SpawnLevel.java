@@ -19,11 +19,14 @@ public class SpawnLevel extends Level{
         try {
             // SpawnLevel.class.getResource(path) -> defunct
             BufferedImage image = ImageIO.read(new File(path));
-            int w = image.getWidth();
-            int h = image.getHeight();
+            this.width = image.getWidth();
+            int w = this.width;
+
+            this.height = image.getHeight();
+            int h = this.height;
 
             tiles = new int[w * h];
-            image.getRGB(0,0,w,h, tiles,0,w);
+            image.getRGB(0,0, w, h, tiles,0,w);
         }catch (IOException e){
             System.out.println("Rain couldn't load level file.");
             e.printStackTrace();
