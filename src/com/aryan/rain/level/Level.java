@@ -10,8 +10,10 @@ import com.aryan.rain.level.tile.Tile;
 public class Level {
 
     protected int width, height;                    // Primarily for L1
-    protected int[] tilesInt;                          // Eg tiles[1] is grass, 2 is stone, etc..
-    protected Tile[] tiles;   // Slow, but precise.
+    protected int[] tilesInt;                       // Eg tiles[1] is grass, 2 is stone, etc..
+
+    protected int[] tiles;  // Contains all of levels tiles. Since one level loaded at a time, this works well.
+
 
     // Used when we generate a random level
     public Level(int width, int height){
@@ -61,12 +63,12 @@ public class Level {
 
         for (int y = y0; y < y1; y++){
             for (int x = x0; x < x1; x++){
-                // getTile(x, y).render(x, y, screen);
-                if (x+y*16 < 0 || x + y * 16 >= 256){
-                    Tile.voidTile.render(x, y, screen);
-                    continue;
-                }
-                tiles[x+y*16].render(x, y, screen);
+                getTile(x, y).render(x, y, screen);
+//                if (x+y*16 < 0 || x + y * 16 >= 256){
+//                    Tile.voidTile.render(x, y, screen);
+//                    continue;
+//                }
+//                tiles[x+y*16].render(x, y, screen);
             }
         }
     }
@@ -76,9 +78,17 @@ public class Level {
 
         if (x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
 
-        if (tilesInt[x+y*width] == 0) return Tile.grass;
-        if (tilesInt[x+y*width] == 1) return Tile.flower;
-        if (tilesInt[x+y*width] == 2) return Tile.rock;
+        // Green -> Grass [0xFF00]
+        // Yellow -> Flower [0xFFFFFF00]
+        // Brown -> Rock [0xFFFFFF00]
+
+        // 0xFF00 == 0x00FF00 (Like 256 == 0256)
+
+        // My Green for grass: [0xFF007F0E]           Infield small grass: [0xFF00FF21]
+
+        if (tilesInt[x+y*width] == 0xFF007F0E) return Tile.grass;
+        if (tilesInt[x+y*width] == 0xFFFFFF00) return Tile.flower;
+        if (tilesInt[x+y*width] == 0xFFFFFF00) return Tile.rock;
 
         return Tile.voidTile;
     }

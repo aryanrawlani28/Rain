@@ -1,7 +1,5 @@
 package com.aryan.rain.level;
 
-import com.aryan.rain.level.tile.Tile;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -10,7 +8,7 @@ import java.io.IOException;
 public class SpawnLevel extends Level{
 
 
-    private int[] levelPixels;
+    //private int[] tiles;
 
     public SpawnLevel(String path) {
         super(path);
@@ -23,9 +21,9 @@ public class SpawnLevel extends Level{
             BufferedImage image = ImageIO.read(new File(path));
             int w = image.getWidth();
             int h = image.getHeight();
-            tiles = new Tile[w * h];
-            levelPixels = new int[w * h];
-            image.getRGB(0,0,w,h,levelPixels,0,w);
+
+            tiles = new int[w * h];
+            image.getRGB(0,0,w,h, tiles,0,w);
         }catch (IOException e){
             System.out.println("Rain couldn't load level file.");
             e.printStackTrace();
@@ -42,12 +40,14 @@ public class SpawnLevel extends Level{
 
         // 0xFF00 == 0x00FF00 (Like 256 == 0256)
 
-        // My Green for grass: [0x007F0E]           Infield small grass: [0x00FF21]
-        for (int i = 0; i < levelPixels.length; i++) {
-            if (levelPixels[i] == 0xFF007F0E) tiles[i] = Tile.grass;        // The extra ff is for the alpha channel because of the way bufferedimage works.
-            if (levelPixels[i] == 0xFFFFFF00) tiles[i] = Tile.flower;
-            if (levelPixels[i] == 0xFF7F7F00) tiles[i] = Tile.rock;
-        }
+        // My Green for grass: [0xFF007F0E]           Infield small grass: [0xFF00FF21]
+//        for (int i = 0; i < levelPixels.length; i++) {
+//            if (levelPixels[i] == 0xFF007F0E) tiles[i] = Tile.grass;        // The extra ff is for the alpha channel because of the way bufferedimage works.
+//            if (levelPixels[i] == 0xFFFFFF00) tiles[i] = Tile.flower;
+//            if (levelPixels[i] == 0xFF7F7F00) tiles [i] = Tile.rock;
+//        }
+
+
     }
 
 }
