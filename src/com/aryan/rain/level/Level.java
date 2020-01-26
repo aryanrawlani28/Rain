@@ -14,6 +14,8 @@ public class Level {
 
     protected int[] tiles;  // Contains all of levels tiles. Since one level loaded at a time, this works well.
 
+    public static Level Spawn = new Level("res/levels/spawn_level.png");
+
 
     // Used when we generate a random level
     public Level(int width, int height){

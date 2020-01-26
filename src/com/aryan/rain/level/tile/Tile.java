@@ -19,7 +19,7 @@ public class Tile {
     public static Tile rock = new RockTile(Sprite.rock);
 
 
-    ////////////// Spawn Tiles ////////////////
+    //////////////////////////// Spawn Tiles //////////////////////////////
 
     // Each has own class because can have diff way of behaving, eg: one is breakable, another is passable, etc.
     public static Tile spawn_grass = new SpawnGrassTile(Sprite.spawn_grass);
@@ -28,6 +28,18 @@ public class Tile {
     public static Tile spawn_wall1 = new SpawnWallTile(Sprite.spawn_wall1);
     public static Tile spawn_wall2 = new SpawnWallTile(Sprite.spawn_wall2); // If just for aesthetic purpose, can have same class.
     public static Tile spawn_floor = new SpawnFloorTile(Sprite.spawn_floor);
+
+    // The following hash colors will be according to your spawn_level generated.
+
+    public static final int col_spawn_grass = 0xFF4CFF00;
+    public static final int col_spawn_hedge = 0;
+    public static final int col_spawn_water = 0;
+    public static final int col_spawn_wall1 = 0xFF404040;
+    public static final int col_spawn_wall2 = 0xFF000000;
+    public static final int col_spawn_floor = 0xFF7F3300;
+    public static final int col_spawn_player = 0xFF4D5863;
+
+    /////////////////////////////////////////////////////////////////////////////////////////
 
     public static Tile voidTile = new VoidTile(Sprite.voidTile);
 
