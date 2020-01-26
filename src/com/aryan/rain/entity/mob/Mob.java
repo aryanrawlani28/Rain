@@ -9,6 +9,13 @@ public class Mob extends Entity {
     protected boolean moving = false;   // Mobs usually have moving animations
 
     public void move(int xa, int ya){
+
+        // Sliding. If moving along 2 axis at once, do that separately.
+        if (xa != 0 && ya != 0) {
+            move(xa, 0);
+            move(0, ya);
+            return;
+        }
         // Any mob: xa -> where moves on x axis, ya -> where move on y axis.
         // Have 3 states: Not moving, up/down, left/right (individually)
 
