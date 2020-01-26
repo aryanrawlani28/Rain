@@ -14,6 +14,13 @@ public class Sprite {
 
     // Sprites are static. Once defined, they stay the same. Sprite.grass would give us all we need.
     public static Sprite grass = new Sprite(16,0,0, SpriteSheet.tiles);
+    public static Sprite flower = new Sprite(16,1,0, SpriteSheet.tiles);
+    public static Sprite rock = new Sprite(16,2,0, SpriteSheet.tiles);
+    // public static Sprite grass = new Sprite(16,0,0, SpriteSheet.tiles);
+
+
+
+
     public static Sprite voidTile = new Sprite(16, 0x339BF5);       // 0 is black. 0xffffff is white.
 
 
