@@ -14,7 +14,7 @@ public class Level {
 
     protected int[] tiles;  // Contains all of levels tiles. Since one level loaded at a time, this works well.
 
-    public static Level Spawn = new Level("res/levels/spawn_level.png");
+    public static Level Spawn = new SpawnLevel("res/levels/spawn_level.png");
 
 
     // Used when we generate a random level
@@ -78,7 +78,7 @@ public class Level {
     // We will render what this method returns. This converts arry to tiles.
     public Tile getTile(int x, int y){
 
-        if (x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
+        if (x < 0 || y < 0 || x >= width || y >= height) return Tile.spawn_wall1;
 
         // Green -> Grass [0xFF00]
         // Yellow -> Flower [0xFFFFFF00]
@@ -88,10 +88,13 @@ public class Level {
 
         // My Green for grass: [0xFF007F0E]           Infield small grass: [0xFF00FF21]
 
-        if (tiles[x+y*width] == 0xFF007F0E) return Tile.grass;
-        if (tiles[x+y*width] == 0xFFFFFF00) return Tile.flower;
-        if (tiles[x+y*width] == 0xFF7F7F00) return Tile.rock;
+        if (tiles[x+y*width] == Tile.col_spawn_floor) return Tile.spawn_floor;
+        if (tiles[x+y*width] == Tile.col_spawn_grass) return Tile.spawn_grass;
+        //if (tiles[x+y*width] == Tile.col_spawn_hedge) return Tile.spawn_hedge;
+        if (tiles[x+y*width] == Tile.col_spawn_wall1) return Tile.spawn_wall1;
+        if (tiles[x+y*width] == Tile.col_spawn_wall2) return Tile.spawn_wall2;
+        //if (tiles[x+y*width] == Tile.col_spawn_water) return Tile.spawn_water;
 
-        return Tile.voidTile;
+        return Tile.spawn_wall1;
     }
 }

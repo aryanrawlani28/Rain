@@ -49,7 +49,7 @@ public class Game extends Canvas implements Runnable{
 
         key = new Keyboard();
 
-        level = new SpawnLevel("res/levels/level.png");
+        level = Level.Spawn;
 
         player = new Player(6*16, 6*16, key);
         addKeyListener(key);
