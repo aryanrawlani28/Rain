@@ -80,20 +80,12 @@ public class Level {
 
         if (x < 0 || y < 0 || x >= width || y >= height) return Tile.spawn_wall1;
 
-        // Green -> Grass [0xFF00]
-        // Yellow -> Flower [0xFFFFFF00]
-        // Brown -> Rock [0xFFFFFF00]
-
-        // 0xFF00 == 0x00FF00 (Like 256 == 0256)
-
-        // My Green for grass: [0xFF007F0E]           Infield small grass: [0xFF00FF21]
-
         if (tiles[x+y*width] == Tile.col_spawn_floor) return Tile.spawn_floor;
         if (tiles[x+y*width] == Tile.col_spawn_grass) return Tile.spawn_grass;
-        //if (tiles[x+y*width] == Tile.col_spawn_hedge) return Tile.spawn_hedge;
+        if (tiles[x+y*width] == Tile.col_spawn_hedge) return Tile.spawn_hedge;
         if (tiles[x+y*width] == Tile.col_spawn_wall1) return Tile.spawn_wall1;
         if (tiles[x+y*width] == Tile.col_spawn_wall2) return Tile.spawn_wall2;
-        //if (tiles[x+y*width] == Tile.col_spawn_water) return Tile.spawn_water;
+        if (tiles[x+y*width] == Tile.col_spawn_water) return Tile.spawn_water;
 
         return Tile.spawn_wall1;
     }

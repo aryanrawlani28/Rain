@@ -6,6 +6,7 @@ import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.level.Level;
 import com.aryan.rain.level.RandomLevel;
 import com.aryan.rain.level.SpawnLevel;
+import com.aryan.rain.level.TileCoordinate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,7 +52,8 @@ public class Game extends Canvas implements Runnable{
 
         level = Level.Spawn;
 
-        player = new Player(6*16, 6*16, key);
+        TileCoordinate playerSpawn = new TileCoordinate(20, 48);
+        player = new Player(playerSpawn.x(), playerSpawn.y(), key);
         addKeyListener(key);
     }
 
