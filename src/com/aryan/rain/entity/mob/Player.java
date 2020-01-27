@@ -1,8 +1,12 @@
 package com.aryan.rain.entity.mob;
 
+import com.aryan.rain.Game;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.Sprite;
 import com.aryan.rain.input.Keyboard;
+import com.aryan.rain.input.Mouse;
+
+import static com.aryan.rain.input.Mouse.getX;
 
 public class Player extends Mob {
 
@@ -46,6 +50,20 @@ public class Player extends Mob {
         }else {
             walking = false;
         }
+
+        updateShooting();
+    }
+
+    private void updateShooting() {
+
+        if (Mouse.getButton() == 1) {
+            // atan2 automatically handles div by zero. So no crash. just atan doesn't handle.
+            int dx = Mouse.getX() - Game.width/2;
+            int dy = Mouse.getY() - Game.height/2;
+            double dir = Math.atan2(dy, dx);
+            shoot(x, y, dir);
+        }
+
     }
 
     // You don't wanna center it always to the player.

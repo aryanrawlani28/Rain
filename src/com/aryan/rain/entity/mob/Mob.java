@@ -2,6 +2,7 @@ package com.aryan.rain.entity.mob;
 
 import com.aryan.rain.entity.Entity;
 import com.aryan.rain.graphics.Sprite;
+import com.aryan.rain.input.Mouse;
 
 public class Mob extends Entity {
     protected Sprite sprite;
@@ -33,6 +34,10 @@ public class Mob extends Entity {
     }
 
     public void update(){
+
+    }
+
+    protected void shoot(int x, int y, double dir){
 
     }
 
