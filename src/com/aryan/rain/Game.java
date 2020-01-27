@@ -17,9 +17,9 @@ import java.awt.image.DataBufferInt;
 
 public class Game extends Canvas implements Runnable{
 
-    public static int width = 300;
-    public static int height = width / 16 * 9;      // Width: 168
-    public static int scale = 3;
+    private static int width = 300;
+    private static int height = width / 16 * 9;      // Width: 168
+    private static int scale = 3;
 
     public static String title = "Rain";
 
@@ -62,6 +62,14 @@ public class Game extends Canvas implements Runnable{
         Mouse mouse = new Mouse();
         addMouseListener(mouse);
         addMouseMotionListener(mouse);
+    }
+
+    public static int getWindowWidth(){
+        return width * scale;
+    }
+
+    public static int getWindowHeight(){
+        return height * scale;
     }
 
     private synchronized void start(){

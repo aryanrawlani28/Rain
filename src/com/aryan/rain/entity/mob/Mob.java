@@ -38,7 +38,7 @@ public class Mob extends Entity {
     }
 
     protected void shoot(int x, int y, double dir){
-
+        dir = Math.toDegrees(dir);
     }
 
     // A better way -> Check all 4 corners.

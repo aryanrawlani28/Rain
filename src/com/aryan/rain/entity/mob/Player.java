@@ -58,8 +58,8 @@ public class Player extends Mob {
 
         if (Mouse.getButton() == 1) {
             // atan2 automatically handles div by zero. So no crash. just atan doesn't handle.
-            int dx = Mouse.getX() - Game.width/2;
-            int dy = Mouse.getY() - Game.height/2;
+            int dx = Mouse.getX() - Game.getWindowWidth()/2;
+            int dy = Mouse.getY() - Game.getWindowHeight()/2;
             double dir = Math.atan2(dy, dx);
             shoot(x, y, dir);
         }
