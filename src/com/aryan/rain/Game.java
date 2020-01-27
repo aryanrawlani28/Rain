@@ -3,6 +3,7 @@ package com.aryan.rain;
 import com.aryan.rain.entity.mob.Player;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.input.Keyboard;
+import com.aryan.rain.input.Mouse;
 import com.aryan.rain.level.Level;
 import com.aryan.rain.level.RandomLevel;
 import com.aryan.rain.level.SpawnLevel;
@@ -55,7 +56,12 @@ public class Game extends Canvas implements Runnable{
         TileCoordinate playerSpawn = new TileCoordinate(20, 59);
         player = new Player(20*16, 59*16, key);
         player.init(level);
+
         addKeyListener(key);
+
+        Mouse mouse = new Mouse();
+        addMouseListener(mouse);
+        addMouseMotionListener(mouse);
     }
 
     private synchronized void start(){
@@ -136,6 +142,9 @@ public class Game extends Canvas implements Runnable{
         g.setColor(Color.BLACK);
         g.fillRect(0,0,getWidth(), getHeight());
         g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
+
+        g.fillRect(Mouse.getX()-16, Mouse.getY()-16, 32,32);
+
 
         g.dispose();
 
