@@ -2,6 +2,7 @@ package com.aryan.rain.entity.mob;
 
 import com.aryan.rain.Game;
 import com.aryan.rain.entity.projectile.Projectile;
+import com.aryan.rain.entity.projectile.WizardProjectile;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.Sprite;
 import com.aryan.rain.input.Keyboard;
@@ -16,6 +17,10 @@ public class Player extends Mob {
     private int anim = 0;
     private boolean walking = false;
 
+    // Projectile p;                   // This projectile is a weapon.
+    private int fireRate = 0;
+
+
     public Player(Keyboard input){
         this.input = input;
         sprite = Sprite.player_forward;
@@ -28,12 +33,16 @@ public class Player extends Mob {
 
         this.input = input;
         sprite = Sprite.player_forward;
+        fireRate = WizardProjectile.FIRE_RATE;
     }
 
 
     public void update(){
         // When press keys, move our player from here. Affects the entity x and y.
         // If user presses up+down at same time, this will effectively cancel movement and player will not move.
+
+        if (fireRate > 0) fireRate--;
+
         int xa = 0, ya = 0;
         if (anim < 7500){
             anim++;
@@ -67,12 +76,14 @@ public class Player extends Mob {
 
     private void updateShooting() {
 
-        if (Mouse.getButton() == 1) {
+        if (Mouse.getButton() == 1 && fireRate <= 0) {
             // atan2 automatically handles div by zero. So no crash. just atan doesn't handle.
             double dx = Mouse.getX() - Game.getWindowWidth()/2;
             double dy = Mouse.getY() - Game.getWindowHeight()/2;
             double dir = Math.atan2(dy, dx);
             shoot(x, y, dir);
+
+            fireRate = WizardProjectile.FIRE_RATE;
         }
 
     }

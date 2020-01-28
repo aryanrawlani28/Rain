@@ -5,12 +5,14 @@ import com.aryan.rain.graphics.Sprite;
 
 public class WizardProjectile extends Projectile{
 
+    public static final int FIRE_RATE = 10;     // Higher the RoF, slower. Time between projectiles.
+
     public WizardProjectile(int x, int y, double dir) {
         super(x, y, dir);
         range = 200;
         speed = 4;
         damage = 20;
-        rateOfFire = 15;
+
         sprite = Sprite.projectile_wizard;
 
         nx = speed * Math.cos(angle);
