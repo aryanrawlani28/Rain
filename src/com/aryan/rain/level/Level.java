@@ -4,6 +4,8 @@ package com.aryan.rain.level;
 // L2: Map level
 
 import com.aryan.rain.entity.Entity;
+import com.aryan.rain.entity.Spawner;
+import com.aryan.rain.entity.particle.Particle;
 import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.level.tile.Tile;
@@ -21,6 +23,7 @@ public class Level {
 
     private List<Entity> entities = new ArrayList<Entity>();
     private List<Projectile> projectiles = new ArrayList<Projectile>();
+    private List<Particle> particles = new ArrayList<Particle>();
 
     public static Level Spawn = new SpawnLevel("res/levels/spawn_level.png");
 
@@ -40,6 +43,8 @@ public class Level {
         // L2
         loadLevel(path);
         generateLevel();
+
+        add(new Spawner(16*16, 62*16, Spawner.Type.PARTICLE, 500, this));
     }
 
     protected void generateLevel() {
@@ -63,6 +68,10 @@ public class Level {
 
         for (int j=0; j < projectiles.size(); j++) {
             projectiles.get(j).update();
+        }
+
+        for (int j=0; j < particles.size(); j++) {
+            particles.get(j).update();
         }
     }
 
@@ -107,16 +116,23 @@ public class Level {
         for (int j=0; j < projectiles.size(); j++) {
             projectiles.get(j).render(screen);
         }
+
+        for (int k=0; k < particles.size(); k++) {
+            particles.get(k).render(screen);
+        }
     }
 
 
     public void add(Entity e){
-        entities.add(e);
-    }
+        e.init(this);
 
-    public void addProjectile(Projectile p){
-        p.init(this);
-        projectiles.add(p);
+        if (e instanceof Particle){
+            particles.add((Particle) e);
+        }else if (e instanceof Projectile){
+            projectiles.add((Projectile) e);
+        }else {
+            entities.add(e);
+        }
     }
 
 

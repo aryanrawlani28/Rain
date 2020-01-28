@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Particle extends Entity {
 
-    private List<Particle> particles = new ArrayList<Particle>();
+    private static List<Particle> particles = new ArrayList<Particle>();
     private Sprite sprite;
 
     private int life;
@@ -31,16 +31,6 @@ public class Particle extends Entity {
 
         this.xa = random.nextGaussian(); // Gives a random no between -1 and 1 (more likely to be around 0)
         this.ya = random.nextGaussian();
-    }
-
-    public Particle(int x, int y, int life, int amount){
-        this(x, y, life);
-
-        for (int i=0; i < amount-1; i++){
-            particles.add(new Particle(x, y, life));
-        }
-
-        particles.add(this);
     }
 
     public void update(){

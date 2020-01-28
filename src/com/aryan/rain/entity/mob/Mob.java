@@ -47,7 +47,7 @@ public abstract class Mob extends Entity {
 
     protected void shoot(int x, int y, double dir){
         Projectile p = new WizardProjectile(x, y, dir);
-        level.addProjectile(p);
+        level.add(p);
     }
 
     // A better way -> Check all 4 corners.
