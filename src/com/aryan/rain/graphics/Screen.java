@@ -1,6 +1,7 @@
 package com.aryan.rain.graphics;
 
 import com.aryan.rain.entity.mob.Player;
+import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.level.tile.Tile;
 
 import java.util.Random;
@@ -58,23 +59,24 @@ public class Screen {
         }
     }
 
-    public void renderTile(int xp, int yp, Sprite sprite){
+    public void renderProjectile(int xp, int yp, Projectile p){
         xp -= xOffset;
         yp -= yOffset;
 
-        for (int y = 0; y < sprite.SIZE; y++){                     //mostly tile size is 16. if increase size in future, no probs this way.
+        for (int y = 0; y < p.getSpriteSize(); y++){                     //mostly tile size is 16. if increase size in future, no probs this way.
 
             int ya = y + yp;
 
-            for (int x = 0; x < sprite.SIZE; x++){                 // same thing for x.
+            for (int x = 0; x < p.getSpriteSize(); x++){                 // same thing for x.
 
                 int xa = x + xp;                                        // xa = x absolute
-                if (xa < -sprite.SIZE || xa >= width || ya < 0 || ya >= height){    // maps are going to be infinite? (Come back to this later #29) are easier?
+                if (xa < -p.getSpriteSize() || xa >= width || ya < 0 || ya >= height){    // maps are going to be infinite? (Come back to this later #29) are easier?
                     break;
                 }
                 if (xa < 0) xa = 0;
 
-                pixels[xa + ya * width] = sprite.pixels[x + y * sprite.SIZE];
+                int col = p.getSprite().pixels[x + y * p.getSprite().SIZE];
+                if (col != 0xFFFF00DC) pixels[xa + ya * width] = col;
 
             }
         }

@@ -22,6 +22,7 @@ public class SpriteSheet {
     // Just use the folders/files inside it for path. Size is 256x256.
     public static SpriteSheet tiles = new SpriteSheet("res/textures/sheets/spritesheet.png", 256);
     public static SpriteSheet spawn_level = new SpriteSheet("res/textures/sheets/spawn_level.png", 48);
+    public static SpriteSheet projectile_wizard = new SpriteSheet("res/textures/sheets/projectiles/wizard.png", 48);
 
     public SpriteSheet(String path, int size){
         this.path = path;
