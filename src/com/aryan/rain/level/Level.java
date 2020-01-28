@@ -70,6 +70,18 @@ public class Level {
         // change level and stuff based on time.
     }
 
+    public boolean tileCollision(double x, double y, double xa, double ya, int size){
+        // boolean solid = false;
+
+        for(int c = 0; c < 4; c++){
+            int xt = (((int)x+(int)xa) + c % 2 * size / 2 - 5) / 16;
+            int yt = (((int)y+(int)ya) + c / 2 * size / 2 + 5) / 16;
+            if (getTile(xt, yt).solid()) return true;
+        }
+
+        return false;
+    }
+
     //this method and vars define the render region
     public void render(int xScroll, int yScroll, Screen screen){
         screen.setOffset(xScroll, yScroll);
@@ -103,6 +115,7 @@ public class Level {
     }
 
     public void addProjectile(Projectile p){
+        p.init(this);
         projectiles.add(p);
     }
 
