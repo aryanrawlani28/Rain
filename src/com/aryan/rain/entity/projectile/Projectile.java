@@ -6,6 +6,8 @@ import com.aryan.rain.graphics.Sprite;
 
 public abstract class Projectile extends Entity {
 
+    protected double x, y;
+
     protected final int xOrigin, yOrigin;
     protected double angle;
     protected Sprite sprite;
