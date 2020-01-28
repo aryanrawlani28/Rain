@@ -14,6 +14,8 @@ public abstract class Projectile extends Entity {
     protected double nx, ny;
     protected double speed, rateOfFire, range, damage;
 
+    protected double distance;  // Distance from origin
+
     public Projectile(int x, int y, double dir){
         xOrigin = x;
         yOrigin = y;

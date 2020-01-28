@@ -1,6 +1,7 @@
 package com.aryan.rain.entity.mob;
 
 import com.aryan.rain.Game;
+import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.Sprite;
 import com.aryan.rain.input.Keyboard;
@@ -51,7 +52,15 @@ public class Player extends Mob {
             walking = false;
         }
 
+        clear();
         updateShooting();
+    }
+
+    private void clear() {
+        for (int i = 0; i < projectiles.size(); i++) {
+            Projectile p = projectiles.get(i);
+            if (p.isRemoved()) projectiles.remove(i);
+        }
     }
 
     private void updateShooting() {
