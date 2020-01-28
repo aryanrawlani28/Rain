@@ -7,7 +7,7 @@ public class WizardProjectile extends Projectile{
 
     public WizardProjectile(int x, int y, double dir) {
         super(x, y, dir);
-        range = 20;
+        range = 200;
         speed = 4;
         damage = 20;
         rateOfFire = 15;
@@ -25,16 +25,20 @@ public class WizardProjectile extends Projectile{
         x += nx;
         y += ny;
 
-        if (distance() > range) remove();
+        if (distance() > this.range) {
+            remove();
+        }
     }
 
     private double distance() {
         double dist = 0;
 
-        double xDist = Math.abs(xOrigin - x);
-        double yDist = Math.abs(yOrigin - y);
+        double xDist = (xOrigin - x);
+        double yDist = (yOrigin - y);
 
-        dist = Math.sqrt(xDist * xDist + yDist * yDist);
+        dist = Math.sqrt((xDist * xDist) + (yDist * yDist));
+
+        // dist = Math.sqrt(Math.abs((xOrigin - x) * (xOrigin - x) + (yOrigin - y) * (yOrigin - y)));
 
         return dist;
     }

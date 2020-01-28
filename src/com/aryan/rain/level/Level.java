@@ -4,6 +4,7 @@ package com.aryan.rain.level;
 // L2: Map level
 
 import com.aryan.rain.entity.Entity;
+import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.level.tile.Tile;
 
@@ -19,6 +20,7 @@ public class Level {
     protected int[] tiles;  // Contains all of levels tiles. Since one level loaded at a time, this works well.
 
     private List<Entity> entities = new ArrayList<Entity>();
+    private List<Projectile> projectiles = new ArrayList<Projectile>();
 
     public static Level Spawn = new SpawnLevel("res/levels/spawn_level.png");
 
@@ -48,11 +50,19 @@ public class Level {
           
     }
 
+    public List<Projectile> getProjectiles(){
+        return projectiles;
+    }
+
 
     public void update(){
         // AI and stuff goes in update. 60 updates per sec
-        for (int i=0; i< entities.size(); i++) {
+        for (int i=0; i < entities.size(); i++) {
             entities.get(i).update();
+        }
+
+        for (int j=0; j < projectiles.size(); j++) {
+            projectiles.get(j).update();
         }
     }
 
@@ -75,22 +85,25 @@ public class Level {
         for (int y = y0; y < y1; y++){
             for (int x = x0; x < x1; x++){
                 getTile(x, y).render(x, y, screen);
-//                if (x+y*16 < 0 || x + y * 16 >= 256){
-//                    Tile.voidTile.render(x, y, screen);
-//                    continue;
-//                }
-//                tiles[x+y*16].render(x, y, screen);
             }
         }
 
         for (int i=0; i< entities.size(); i++) {
             entities.get(i).render(screen);
         }
+
+        for (int j=0; j < projectiles.size(); j++) {
+            projectiles.get(j).render(screen);
+        }
     }
 
 
     public void add(Entity e){
         entities.add(e);
+    }
+
+    public void addProjectile(Projectile p){
+        projectiles.add(p);
     }
 
 

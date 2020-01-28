@@ -4,6 +4,8 @@ import com.aryan.rain.entity.Entity;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.Sprite;
 
+import java.util.Random;
+
 public abstract class Projectile extends Entity {
 
     protected double x, y;
@@ -15,6 +17,8 @@ public abstract class Projectile extends Entity {
     protected double speed, rateOfFire, range, damage;
 
     protected double distance;  // Distance from origin
+
+    protected final Random random = new Random();
 
     public Projectile(int x, int y, double dir){
         xOrigin = x;

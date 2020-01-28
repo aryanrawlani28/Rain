@@ -57,9 +57,11 @@ public class Player extends Mob {
     }
 
     private void clear() {
-        for (int i = 0; i < projectiles.size(); i++) {
-            Projectile p = projectiles.get(i);
-            if (p.isRemoved()) projectiles.remove(i);
+        for (int i = 0; i < level.getProjectiles().size(); i++) {
+            Projectile p = level.getProjectiles().get(i);
+            if (p.isRemoved()){
+                level.getProjectiles().remove(i);
+            }
         }
     }
 
@@ -67,8 +69,8 @@ public class Player extends Mob {
 
         if (Mouse.getButton() == 1) {
             // atan2 automatically handles div by zero. So no crash. just atan doesn't handle.
-            int dx = Mouse.getX() - Game.getWindowWidth()/2;
-            int dy = Mouse.getY() - Game.getWindowHeight()/2;
+            double dx = Mouse.getX() - Game.getWindowWidth()/2;
+            double dy = Mouse.getY() - Game.getWindowHeight()/2;
             double dir = Math.atan2(dy, dx);
             shoot(x, y, dir);
         }

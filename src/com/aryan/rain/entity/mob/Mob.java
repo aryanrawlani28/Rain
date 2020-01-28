@@ -9,12 +9,10 @@ import com.aryan.rain.input.Mouse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Mob extends Entity {
+public abstract class Mob extends Entity {
     protected Sprite sprite;
     protected int dir = 0;              // 0 -> north. 1 -> east, 2 -> south, 3 -> west. Clockwise.
     protected boolean moving = false;   // Mobs usually have moving animations
-
-    protected List<Projectile> projectiles = new ArrayList<Projectile>();   // Need to add to level also
 
     public void move(int xa, int ya){
 
@@ -45,12 +43,8 @@ public class Mob extends Entity {
     }
 
     protected void shoot(int x, int y, double dir){
-        // dir = Math.toDegrees(dir); OR dir *= 180 / Math.PI;      -> To conv to degrees.
-
         Projectile p = new WizardProjectile(x, y, dir);
-        projectiles.add(p);
-        level.add(p);
-
+        level.addProjectile(p);
     }
 
     // A better way -> Check all 4 corners.
@@ -58,7 +52,7 @@ public class Mob extends Entity {
         // boolean solid = false;
 
         for(int c = 0; c < 4; c++){
-            int xt = ((x+xa) + c % 2 * 14 - 8) /16; // 10 is the width of collision area
+            int xt = ((x+xa) + c % 2 * 14 - 8) /16;     // 10 is the width of collision area
             int yt = ((y+ya) + c / 2 * 12 + 3) /16;
             if (level.getTile(xt, yt).solid() == true) return true;
         }
