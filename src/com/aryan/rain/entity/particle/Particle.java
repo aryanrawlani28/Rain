@@ -16,13 +16,21 @@ public class Particle extends Entity {
 
     private int life;
 
+    protected double xx, yy, xa, ya;    // Amount of pixels moves on respective axis.
+
     // For one particle
     public Particle(int x, int y, int life){
         this.x = x;
         this.y = y;
+        this.xx = x;
+        this.yy = y;
+
         this.life = life;
 
         sprite = Sprite.particle_normal;
+
+        this.xa = random.nextGaussian(); // Gives a random no between -1 and 1 (more likely to be around 0)
+        this.ya = random.nextGaussian();
     }
 
     public Particle(int x, int y, int life, int amount){
@@ -37,10 +45,14 @@ public class Particle extends Entity {
 
     public void update(){
         // Animation code
+
+        this.xx += xa;
+        this.yy += ya;
     }
 
     public void render(Screen screen){
         // Renders particles
+        screen.renderSprite((int)xx, (int)yy, sprite, true);
     }
 
 }
