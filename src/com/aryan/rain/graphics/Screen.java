@@ -36,6 +36,25 @@ public class Screen {
         }
     }
 
+    // This method can draw any sprite.
+    public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed){
+        if (fixed) {
+            xp -= xOffset;
+            yp -= yOffset;
+        }
+
+        for (int y = 0; y < sprite.getHeight(); y++){
+            int ya = y + yp;
+            for (int x = 0; x < sprite.getWidth(); x++){
+                int xa = x + xp;
+                if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
+                pixels[xa+ya*width] = sprite.pixels[x+y*sprite.getWidth()];
+            }
+        }
+
+
+    }
+
     // Make sure to render only what we need. Also, when we move right -> player moves right but map should move to left.
     public void renderTile(int xp, int yp, Tile tile){
         xp -= xOffset;

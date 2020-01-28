@@ -2,6 +2,7 @@ package com.aryan.rain;
 
 import com.aryan.rain.entity.mob.Player;
 import com.aryan.rain.graphics.Screen;
+import com.aryan.rain.graphics.Sprite;
 import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.input.Mouse;
 import com.aryan.rain.level.Level;
@@ -14,6 +15,7 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.util.Random;
 
 public class Game extends Canvas implements Runnable{
 
@@ -141,6 +143,18 @@ public class Game extends Canvas implements Runnable{
 
         level.render(xScroll, yScroll, screen);
         player.render(screen);
+
+        //////////////////////// Particle graphics demo ////////////////////////
+
+        Sprite sprite = new Sprite(40, 40, 0xFFFFFFFF);
+        Random random = new Random();
+        for (int i=0; i<100; i++) {
+            int x = random.nextInt(20);
+            int y = random.nextInt(20);
+            screen.renderSprite(width-60+x, 50+y, sprite, true); // true -> stays static in one part of map
+        }
+
+        //////////////////////////////////////////////////////////////////////
 
         for(int i=0; i<pixels.length; i++){
             pixels[i] = screen.pixels[i];

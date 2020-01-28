@@ -8,15 +8,26 @@ public class Sprite {
     private  int x,y;
     public int[] pixels;
 
-    //Multiple spritesheets, multiple sprites. Which sprite belong to which sheet?
+    private int width, height;
+
+    // Multiple spritesheets, multiple sprites. Which sprite belong to which sheet?
     private SpriteSheet sheet;
 
+
+// ---------------------------------------------------------------------------------------------------------- //
+
+    ////////////////////////////// GLOBAL SPRITES /////////////////////////////////////
 
     // Sprites are static. Once defined, they stay the same. Sprite.grass would give us all we need.
     public static Sprite grass = new Sprite(16,0,0, SpriteSheet.tiles);
     public static Sprite flower = new Sprite(16,1,0, SpriteSheet.tiles);
     public static Sprite rock = new Sprite(16,2,0, SpriteSheet.tiles);
+    public static Sprite voidTile = new Sprite(16, 0x339BF5);               // 0 is black. 0xffffff is white.
 
+    //////////////////////////////////////////////////////////////////////////////////////////
+
+
+// ---------------------------------------------------------------------------------------------------------- //
 
 
     ////////////////////////////// SPAWN LEVEL SPRITES /////////////////////////////////////
@@ -31,8 +42,10 @@ public class Sprite {
     //////////////////////////////////////////////////////////////////////////////////////////
 
 
-    public static Sprite voidTile = new Sprite(16, 0x339BF5);       // 0 is black. 0xffffff is white.
+// ---------------------------------------------------------------------------------------------------------- //
 
+
+    ////////////////////////////// PLAYER SPRITES /////////////////////////////////////
 
     public static Sprite player_back = new Sprite(32, 0, 5, SpriteSheet.tiles);
     public static Sprite player_forward = new Sprite(32, 2, 5, SpriteSheet.tiles);
@@ -47,12 +60,29 @@ public class Sprite {
     public static Sprite player_back_1 = new Sprite(32, 2, 6, SpriteSheet.tiles);
     public static Sprite player_back_2 = new Sprite(32, 2, 7, SpriteSheet.tiles);
 
-    // Projectile sprites.
+
+    //////////////////////////////////////////////////////////////////////////////////////////
+
+
+// ---------------------------------------------------------------------------------------------------------- //
+
+
+    ////////////////////////////// PROJECTILE SPRITES /////////////////////////////////////
+
     public static Sprite projectile_wizard = new Sprite(16, 0, 0, SpriteSheet.projectile_wizard);
+
+    //////////////////////////////////////////////////////////////////////////////////////////
+
+
+// ---------------------------------------------------------------------------------------------------------- //
+
 
     // Even tho we have 16px sprites, monsters, etc can be big. So they can be bigger.
     public Sprite(int size, int x, int y, SpriteSheet sheet){
         this.SIZE = size;
+
+        this.height = size;
+        this.width = size;
 
         pixels = new int[SIZE * SIZE];      // Creates a pixel array, size of sprite. Mostly 16.
 
@@ -64,7 +94,18 @@ public class Sprite {
 
     }
 
+    public Sprite(int width, int height, int color){
+        this.height = height;
+        this.width = width;
+        pixels = new int[height*width];
+        SIZE = -1;
+        setColor(color);
+    }
+
     public Sprite(int size, int color){
+        this.height = size;
+        this.width = size;
+
         SIZE = size;
         pixels = new int[SIZE * SIZE];
         setColor(color);
@@ -72,9 +113,17 @@ public class Sprite {
 
     // Fill pixel array with some color
     private void setColor(int color) {
-        for (int i = 0; i < SIZE * SIZE; i++){
+        for (int i = 0; i < width * height; i++){
             pixels[i] = color;
         }
+    }
+
+    public int getWidth(){
+        return width;
+    }
+
+    public int getHeight(){
+        return height;
     }
 
     private void load(){
