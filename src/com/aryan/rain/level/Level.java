@@ -3,8 +3,12 @@ package com.aryan.rain.level;
 // L1: Random gen (Noise mapping - advanced)
 // L2: Map level
 
+import com.aryan.rain.entity.Entity;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.level.tile.Tile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 // Manages which tiles need to be rendered.
 public class Level {
@@ -13,6 +17,8 @@ public class Level {
     protected int[] tilesInt;                       // Eg tiles[1] is grass, 2 is stone, etc..
 
     protected int[] tiles;  // Contains all of levels tiles. Since one level loaded at a time, this works well.
+
+    private List<Entity> entities = new ArrayList<Entity>();
 
     public static Level Spawn = new SpawnLevel("res/levels/spawn_level.png");
 
@@ -45,6 +51,9 @@ public class Level {
 
     public void update(){
         // AI and stuff goes in update. 60 updates per sec
+        for (int i=0; i< entities.size(); i++) {
+            entities.get(i).update();
+        }
     }
 
     private void time(){
@@ -73,7 +82,17 @@ public class Level {
 //                tiles[x+y*16].render(x, y, screen);
             }
         }
+
+        for (int i=0; i< entities.size(); i++) {
+            entities.get(i).render(screen);
+        }
     }
+
+
+    public void add(Entity e){
+        entities.add(e);
+    }
+
 
     // We will render what this method returns. This converts arry to tiles.
     public Tile getTile(int x, int y){

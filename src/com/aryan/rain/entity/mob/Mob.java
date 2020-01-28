@@ -1,13 +1,20 @@
 package com.aryan.rain.entity.mob;
 
 import com.aryan.rain.entity.Entity;
+import com.aryan.rain.entity.projectile.Projectile;
+import com.aryan.rain.entity.projectile.WizardProjectile;
 import com.aryan.rain.graphics.Sprite;
 import com.aryan.rain.input.Mouse;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Mob extends Entity {
     protected Sprite sprite;
     protected int dir = 0;              // 0 -> north. 1 -> east, 2 -> south, 3 -> west. Clockwise.
     protected boolean moving = false;   // Mobs usually have moving animations
+
+    protected List<Projectile> projectiles = new ArrayList<Projectile>();   // Need to add to level also
 
     public void move(int xa, int ya){
 
@@ -38,7 +45,12 @@ public class Mob extends Entity {
     }
 
     protected void shoot(int x, int y, double dir){
-        dir = Math.toDegrees(dir);
+        // dir = Math.toDegrees(dir); OR dir *= 180 / Math.PI;      -> To conv to degrees.
+
+        Projectile p = new WizardProjectile(x, y, dir);
+        projectiles.add(p);
+        level.add(p);
+
     }
 
     // A better way -> Check all 4 corners.
