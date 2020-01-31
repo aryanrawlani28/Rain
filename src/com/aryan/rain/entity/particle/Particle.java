@@ -17,7 +17,8 @@ public class Particle extends Entity {
     private int life;
     private int time = 0;
 
-    protected double xx, yy, xa, ya;    // Amount of pixels moves on respective axis.
+    protected double xx, yy, zz;
+    protected double xa, ya, za;
 
     // For one particle
     public Particle(int x, int y, int life){
@@ -30,8 +31,13 @@ public class Particle extends Entity {
 
         sprite = Sprite.particle_normal;
 
-        this.xa = random.nextGaussian(); // Gives a random no between -1 and 1 (more likely to be around 0)
+        this.xa = random.nextGaussian() + 1.45; // Gives a random no between -1 and 1 (more likely to be around 0)
+
+        if (this.xa < 0) xa = 0.1;
+
         this.ya = random.nextGaussian();
+
+        this.zz = random.nextFloat() + 2.0;
     }
 
     public void update(){
@@ -43,13 +49,25 @@ public class Particle extends Entity {
         if (time >= 7400) time = 0;
         if (time > life) remove();
 
+        za -= 0.1;  // default val of za is 0. as soon as start, becomes neg.
+
+        if (this.zz < 0){
+            zz = 0;
+            za *= -0.545;       // might differ from sprite to sprite. metals will bounce less for eg.
+
+            xa *= 0.2;
+            ya *= 0.4;
+        }
+
         this.xx += xa;
         this.yy += ya;
+
+        this.zz += za;
     }
 
     public void render(Screen screen){
         // Renders particles
-        screen.renderSprite((int)xx, (int)yy, sprite, true);
+        screen.renderSprite((int)xx, (int)yy - (int)zz, sprite, true);
     }
 
 }
