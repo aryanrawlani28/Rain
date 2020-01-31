@@ -3,6 +3,7 @@ package com.aryan.rain.entity.mob;
 import com.aryan.rain.entity.Entity;
 import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.entity.projectile.WizardProjectile;
+import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.Sprite;
 
 public abstract class Mob extends Entity {
@@ -34,9 +35,9 @@ public abstract class Mob extends Entity {
         }
     }
 
-    public void update(){
+    public abstract void update();
 
-    }
+    public abstract void render(Screen screen);
 
     protected void shoot(int x, int y, double dir){
         Projectile p = new WizardProjectile(x, y, dir);
@@ -55,10 +56,4 @@ public abstract class Mob extends Entity {
 
         return false;
     }
-
-    public void render(){
-
-    }
 }
-
-// TODO: Add lightning support.

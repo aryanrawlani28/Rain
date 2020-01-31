@@ -163,8 +163,6 @@ public class Sprite {
         for(int y=0; y<SIZE; y++){
             for(int x=0; x < SIZE; x++){
                 // Basically extract a single sprite out of the spritesheet. (Spritesheet has multiple sprites)
-                //pixels[x + y * SIZE] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SIZE];
-                // TODO: Remove this line below.
                 pixels[x + y * SIZE] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SIZE];
             }
         }

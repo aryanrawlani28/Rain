@@ -10,8 +10,6 @@ import com.aryan.rain.graphics.SpriteSheet;
 import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.input.Mouse;
 
-import static com.aryan.rain.input.Mouse.getX;
-
 public class Player extends Mob {
 
     private Keyboard input;
@@ -117,54 +115,9 @@ public class Player extends Mob {
     // You don't wanna center it always to the player.
     public void render(Screen screen){
         int flip = 0;
-//        if (dir == 0){
-//            sprite = Sprite.player_forward;
-//            if (walking){
-//                if (anim % 20 > 10){
-//                    sprite = Sprite.player_forward_1;
-//                }else{
-//                    sprite = Sprite.player_forward_2;
-//                }
-//            }
-//        }
-//
-//        if(dir == 1){
-//            sprite = Sprite.player_side;
-//            if (walking){
-//                if (anim % 20 > 10){
-//                    sprite = Sprite.player_side_1;
-//                }else{
-//                    sprite = Sprite.player_side_2;
-//                }
-//            }
-//        }
-//
-//        if (dir == 2) {
-//            sprite = Sprite.player_back;
-//            if (walking){
-//                if (anim % 20 > 10){
-//                    sprite = Sprite.player_back_1;
-//                }else{
-//                    sprite = Sprite.player_back_2;
-//                }
-//            }
-//        }
-//
-//        if (dir == 3) {
-//            sprite = Sprite.player_side;
-//            flip = 1;
-//            if (walking){
-//                if (anim % 20 > 10){
-//                    sprite = Sprite.player_side_1;
-//                }else{
-//                    sprite = Sprite.player_side_2;
-//                }
-//            }
-//        }
 
-        // Testing
         sprite = animSprite.getSprite();
-        //
-        screen.renderPlayer(x-16, y-16, sprite, flip);
+
+        screen.renderMob(x-16, y-16, sprite, flip);
     }
 }

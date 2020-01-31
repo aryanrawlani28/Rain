@@ -1,5 +1,7 @@
 package com.aryan.rain.level;
 
+import com.aryan.rain.entity.mob.Dummy;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -25,6 +27,8 @@ public class SpawnLevel extends Level{
             System.out.println("Rain couldn't load level file.");
             e.printStackTrace();
         }
+
+        add(new Dummy(20, 59));
     }
 
     protected void generateLevel(){
