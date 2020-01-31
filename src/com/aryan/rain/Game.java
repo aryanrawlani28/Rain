@@ -3,6 +3,7 @@ package com.aryan.rain;
 import com.aryan.rain.entity.mob.Player;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.Sprite;
+import com.aryan.rain.graphics.SpriteSheet;
 import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.input.Mouse;
 import com.aryan.rain.level.Level;
@@ -143,6 +144,15 @@ public class Game extends Canvas implements Runnable{
 
         level.render(xScroll, yScroll, screen);
         player.render(screen);
+
+        //////////////////////// Spritesheet render demo ////////////////////////
+
+        screen.renderSheet(40, 40, SpriteSheet.player, false);
+
+        //////////////////////////////////////////////////////////////////////
+
+
+
 
         //////////////////////// Particle graphics demo ////////////////////////
 
