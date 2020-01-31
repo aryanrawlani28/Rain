@@ -1,14 +1,9 @@
 package com.aryan.rain.entity.mob;
 
 import com.aryan.rain.entity.Entity;
-import com.aryan.rain.entity.particle.Particle;
 import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.entity.projectile.WizardProjectile;
 import com.aryan.rain.graphics.Sprite;
-import com.aryan.rain.input.Mouse;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Mob extends Entity {
     protected Sprite sprite;
@@ -36,8 +31,6 @@ public abstract class Mob extends Entity {
         if(!collision(xa, ya)) {
             x += xa;    // Tile that you are going to be in.
             y += ya;
-        }else {
-
         }
     }
 

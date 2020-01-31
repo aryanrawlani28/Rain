@@ -31,10 +31,7 @@ public class Particle extends Entity {
 
         sprite = Sprite.particle_normal;
 
-        this.xa = random.nextGaussian() + 1.45; // nextGaussian: Gives a random no between -1 and 1 (more likely to be around 0)
-
-        if (this.xa < 0) xa = 0.1;
-
+        this.xa = random.nextGaussian();    // nextGaussian: Gives a random no between -1 and 1 (more likely to be around 0)
         this.ya = random.nextGaussian();
 
         this.zz = random.nextFloat() + 2.0;
@@ -53,21 +50,51 @@ public class Particle extends Entity {
 
         if (this.zz < 0){
             zz = 0;
-            za *= -0.545;       // might differ from material to material. metals will bounce less for eg.
+            za *= -0.55;       // might differ from material to material. metals will bounce less for eg.
 
             xa *= 0.2;
             ya *= 0.4;
         }
 
+        move((xx+xa), (yy+ya) +(zz+za));
+
+
+    }
+
+    private void move(double x, double y) {
+
+        if (collision(x, y)) {  // Reverse particles if collision
+            this.xa *= -0.5;
+            this.ya *= -0.5;
+            this.za *= -0.5;
+        }
+
         this.xx += xa;
         this.yy += ya;
-
         this.zz += za;
+    }
+
+    public boolean collision(double x, double y){
+        for(int c = 0; c < 4; c++){
+
+            double xt = (x - c % 2 * 16) / 16;   // basically do we use size or not? to check each corner
+            double yt = (y - c / 2 * 16) / 16;
+
+            int ix = (int) Math.ceil(xt);
+            int iy = (int) Math.ceil(yt);
+
+            if (c % 2 == 0) ix = (int) Math.floor(xt);
+            if (c / 2 == 0) iy = (int) Math.floor(yt);
+
+            if (level.getTile(ix, iy).solid()) return true;
+        }
+
+        return false;
     }
 
     public void render(Screen screen){
         // Renders particles
-        screen.renderSprite((int)xx, (int)yy - (int)zz, sprite, true);
+        screen.renderSprite((int)xx - 1, (int)yy - (int)zz -2, sprite, true);
     }
 
 }
