@@ -28,6 +28,8 @@ public class SpriteSheet {
     public static SpriteSheet player = new SpriteSheet("res/textures/sheets/player_sheet.png", 128, 96);
     public static SpriteSheet player_down = new SpriteSheet(player, 0, 0, 1, 3, 32);
 
+    private Sprite sprites[];
+
     public SpriteSheet(SpriteSheet sheet, int x, int y, int width, int height, int spriteSize) {
 
         // Args provided width and height are sprite-precision values.
@@ -54,6 +56,33 @@ public class SpriteSheet {
                 pixels[x0 + y0 * w] = sheet.pixels[xp + yp * sheet.WIDTH];
             }
         }
+
+        int frame = 0;
+
+        sprites = new Sprite[width * height];
+
+        for (int ya = 0; ya < height; ya++){
+            for (int xa = 0; xa < width; xa++){
+
+                int[] spritePixels = new int[spriteSize * spriteSize];
+
+                // Below two iterate through our sprites.
+                // Basically move through entire spritesheet and take out particular sections.
+                // Take out one area.
+                for (int y0 = 0; y0 < spriteSize; y0++){
+                    for (int x0 = 0; x0 < spriteSize; x0++){
+                        // We're advancing horizontally first, row by row
+                        spritePixels[x0 + y0 * spriteSize] = pixels[(x0 + xa * spriteSize) + (y0 + ya * spriteSize) * this.WIDTH];   // Remember to offset by the actual position in the sheet
+                    }
+                }
+                Sprite sprite = new Sprite(spritePixels, spriteSize, spriteSize);
+                sprites[frame++] = sprite;
+                // if (frame >= 3072) break;
+
+            }
+        }
+
+
     }
 
     public SpriteSheet(String path, int size){
@@ -75,6 +104,10 @@ public class SpriteSheet {
 
         pixels = new int[WIDTH*HEIGHT];
         load(path);
+    }
+
+    public Sprite[] getSprite(){
+        return sprites;
     }
 
     // Load the image file

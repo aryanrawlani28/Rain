@@ -11,7 +11,7 @@ public class Sprite {
     private int width, height;
 
     // Multiple spritesheets, multiple sprites. Which sprite belong to which sheet?
-    private SpriteSheet sheet;
+    protected SpriteSheet sheet;
 
 
 // ---------------------------------------------------------------------------------------------------------- //
@@ -85,6 +85,19 @@ public class Sprite {
 
 // ---------------------------------------------------------------------------------------------------------- //
 
+    protected Sprite(SpriteSheet sheet, int width, int height){
+        // We're not really gonna use this
+        if (width == height) SIZE = width;
+        else SIZE = -1;
+
+        // SIZE = (width == height) ? width : -1;
+
+        this.width = width;
+        this.height = height;
+
+        this.sheet = sheet;
+    }
+
     // Even tho we have 16px sprites, monsters, etc can be big. So they can be bigger.
     public Sprite(int size, int x, int y, SpriteSheet sheet){
         this.SIZE = size;
@@ -119,6 +132,18 @@ public class Sprite {
         setColor(color);
     }
 
+    public Sprite(int[] pixels, int width, int height) {
+
+        if (width == height) SIZE = width;
+        else SIZE = -1;
+
+        this.width = width;
+        this.height = height;
+
+        this.pixels = pixels;
+
+    }
+
     // Fill pixel array with some color
     private void setColor(int color) {
         for (int i = 0; i < width * height; i++){
@@ -138,6 +163,8 @@ public class Sprite {
         for(int y=0; y<SIZE; y++){
             for(int x=0; x < SIZE; x++){
                 // Basically extract a single sprite out of the spritesheet. (Spritesheet has multiple sprites)
+                //pixels[x + y * SIZE] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SIZE];
+                // TODO: Remove this line below.
                 pixels[x + y * SIZE] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SIZE];
             }
         }

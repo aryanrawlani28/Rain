@@ -147,7 +147,7 @@ public class Game extends Canvas implements Runnable{
 
         //////////////////////// Spritesheet render demo ////////////////////////
 
-        screen.renderSheet(40, 40, SpriteSheet.player, false);
+        // screen.renderSheet(40, 40, SpriteSheet.player, false);
 
         //////////////////////////////////////////////////////////////////////
 

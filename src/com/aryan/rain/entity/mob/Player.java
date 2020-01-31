@@ -3,8 +3,10 @@ package com.aryan.rain.entity.mob;
 import com.aryan.rain.Game;
 import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.entity.projectile.WizardProjectile;
+import com.aryan.rain.graphics.AnimatedSprite;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.Sprite;
+import com.aryan.rain.graphics.SpriteSheet;
 import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.input.Mouse;
 
@@ -16,6 +18,8 @@ public class Player extends Mob {
     private Sprite sprite;
     private int anim = 0;
     private boolean walking = false;
+
+    private AnimatedSprite test = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 3);
 
     // Projectile p;                   // This projectile is a weapon.
     private int fireRate = 0;
@@ -40,6 +44,8 @@ public class Player extends Mob {
     public void update(){
         // When press keys, move our player from here. Affects the entity x and y.
         // If user presses up+down at same time, this will effectively cancel movement and player will not move.
+
+        test.update();
 
         if (fireRate > 0) fireRate--;
 
@@ -136,6 +142,9 @@ public class Player extends Mob {
             }
         }
 
+        // Testing
+        sprite = test.getSprite();
+        //
         screen.renderPlayer(x-16, y-16, sprite, flip);
     }
 }
