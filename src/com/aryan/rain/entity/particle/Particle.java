@@ -31,7 +31,7 @@ public class Particle extends Entity {
 
         sprite = Sprite.particle_normal;
 
-        this.xa = random.nextGaussian() + 1.45; // Gives a random no between -1 and 1 (more likely to be around 0)
+        this.xa = random.nextGaussian() + 1.45; // nextGaussian: Gives a random no between -1 and 1 (more likely to be around 0)
 
         if (this.xa < 0) xa = 0.1;
 
@@ -53,7 +53,7 @@ public class Particle extends Entity {
 
         if (this.zz < 0){
             zz = 0;
-            za *= -0.545;       // might differ from sprite to sprite. metals will bounce less for eg.
+            za *= -0.545;       // might differ from material to material. metals will bounce less for eg.
 
             xa *= 0.2;
             ya *= 0.4;
