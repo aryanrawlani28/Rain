@@ -15,6 +15,7 @@ public class Particle extends Entity {
     private Sprite sprite;
 
     private int life;
+    private int time = 0;
 
     protected double xx, yy, xa, ya;    // Amount of pixels moves on respective axis.
 
@@ -25,7 +26,7 @@ public class Particle extends Entity {
         this.xx = x;
         this.yy = y;
 
-        this.life = life;
+        this.life = life + (random.nextInt(20) - 10);
 
         sprite = Sprite.particle_normal;
 
@@ -35,6 +36,12 @@ public class Particle extends Entity {
 
     public void update(){
         // Animation code
+
+        time++;
+        // if (time >= Integer.MAX_VALUE - 1) time = 0;  -> If you want to be safe.
+
+        if (time >= 7400) time = 0;
+        if (time > life) remove();
 
         this.xx += xa;
         this.yy += ya;

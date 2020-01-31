@@ -1,5 +1,6 @@
-package com.aryan.rain.entity;
+package com.aryan.rain.entity.spawner;
 
+import com.aryan.rain.entity.Entity;
 import com.aryan.rain.entity.particle.Particle;
 import com.aryan.rain.level.Level;
 
@@ -9,6 +10,7 @@ import java.util.List;
 public class Spawner extends Entity {
 
     // Going to be a parent of any entity. So firstly, it is an entity in itself.
+    // Not every has life. Eg mobs are there until they die. Particles however, disappear after a short while.
 
     // Creates own file in compiler
     public enum Type{
@@ -25,11 +27,7 @@ public class Spawner extends Entity {
 
         this.type = type;
 
-        for (int i=0; i < amount; i++){
-            if (type == Type.PARTICLE){
-                level.add(new Particle(x, y, 50));
-            }
-        }
+
     }
 
 }

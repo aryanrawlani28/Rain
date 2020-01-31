@@ -4,7 +4,6 @@ package com.aryan.rain.level;
 // L2: Map level
 
 import com.aryan.rain.entity.Entity;
-import com.aryan.rain.entity.Spawner;
 import com.aryan.rain.entity.particle.Particle;
 import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.graphics.Screen;
@@ -43,8 +42,6 @@ public class Level {
         // L2
         loadLevel(path);
         generateLevel();
-
-        add(new Spawner(16*16, 62*16, Spawner.Type.PARTICLE, 500, this));
     }
 
     protected void generateLevel() {
@@ -63,16 +60,34 @@ public class Level {
     public void update(){
         // AI and stuff goes in update. 60 updates per sec
         for (int i=0; i < entities.size(); i++) {
-            entities.get(i).update();
+            if (entities.get(i).isRemoved()){
+                entities.remove(i);
+            }else {
+                entities.get(i).update();
+            }
         }
 
         for (int j=0; j < projectiles.size(); j++) {
-            projectiles.get(j).update();
+            if (projectiles.get(j).isRemoved()) {
+                projectiles.remove(j);
+            }else{
+                projectiles.get(j).update();
+            }
         }
 
-        for (int j=0; j < particles.size(); j++) {
-            particles.get(j).update();
+        for (int k=0; k < particles.size(); k++) {
+            if (particles.get(k).isRemoved()){
+                particles.remove(k);
+            }else{
+                particles.get(k).update();
+            }
         }
+
+        remove();
+    }
+
+    private void remove(){
+
     }
 
     private void time(){
