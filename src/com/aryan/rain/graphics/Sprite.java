@@ -85,6 +85,9 @@ public class Sprite {
 
 // ---------------------------------------------------------------------------------------------------------- //
 
+    public static Sprite dummy = new Sprite(32, 0, 0, SpriteSheet.dummy_down);
+
+
     protected Sprite(SpriteSheet sheet, int width, int height){
         // We're not really gonna use this
         if (width == height) SIZE = width;
@@ -160,10 +163,10 @@ public class Sprite {
     }
 
     private void load(){
-        for(int y=0; y<SIZE; y++){
-            for(int x=0; x < SIZE; x++){
+        for(int y=0; y<height; y++){
+            for(int x=0; x < width; x++){
                 // Basically extract a single sprite out of the spritesheet. (Spritesheet has multiple sprites)
-                pixels[x + y * SIZE] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SIZE];
+                pixels[x + y * width] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.WIDTH];
             }
         }
     }

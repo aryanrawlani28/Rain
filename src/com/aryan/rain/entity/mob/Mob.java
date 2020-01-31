@@ -8,8 +8,13 @@ import com.aryan.rain.graphics.Sprite;
 
 public abstract class Mob extends Entity {
     protected Sprite sprite;
-    protected int dir = 0;              // 0 -> north. 1 -> east, 2 -> south, 3 -> west. Clockwise.
-    protected boolean moving = false;   // Mobs usually have moving animations
+    protected boolean walking = false;   // Mobs usually have moving animations
+
+    protected enum Direction{
+        UP, DOWN, LEFT, RIGHT
+    }
+
+    protected Direction dir;
 
     public void move(int xa, int ya){
 
@@ -23,10 +28,10 @@ public abstract class Mob extends Entity {
         // Have 3 states: Not moving, up/down, left/right (individually)
 
         // 0 -> north. 1 -> east, 2 -> south, 3 -> west. Clockwise.
-        if (xa > 0) dir = 1;
-        if (xa < 0) dir = 3;
-        if (ya > 0) dir = 2;
-        if (ya < 0) dir = 0;
+        if (xa > 0) dir = Direction.RIGHT;
+        if (xa < 0) dir = Direction.LEFT;
+        if (ya > 0) dir = Direction.UP;
+        if (ya < 0) dir = Direction.DOWN;
 
         // If no collision -> can move.
         if(!collision(xa, ya)) {
