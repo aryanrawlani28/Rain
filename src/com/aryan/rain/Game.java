@@ -145,15 +145,6 @@ public class Game extends Canvas implements Runnable{
         level.render(xScroll, yScroll, screen);
         player.render(screen);
 
-        //////////////////////// Spritesheet render demo ////////////////////////
-
-        // screen.renderSheet(40, 40, SpriteSheet.player, false);
-
-        //////////////////////////////////////////////////////////////////////
-
-
-
-
         //////////////////////// Particle graphics demo ////////////////////////
 
 //        Sprite sprite = new Sprite(40, 40, 0xFFFFFFFF);
