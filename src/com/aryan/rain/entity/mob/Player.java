@@ -19,7 +19,12 @@ public class Player extends Mob {
     private int anim = 0;
     private boolean walking = false;
 
-    private AnimatedSprite test = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 3);
+    private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 3);
+    private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 32, 32, 3);
+    private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 32, 32, 3);
+    private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 32, 32, 3);
+
+    private AnimatedSprite animSprite = down;
 
     // Projectile p;                   // This projectile is a weapon.
     private int fireRate = 0;
@@ -28,6 +33,7 @@ public class Player extends Mob {
     public Player(Keyboard input){
         this.input = input;
         sprite = Sprite.player_forward;
+        animSprite = down;
     }
 
     // Sometimes players are created at a specific location.
@@ -45,7 +51,8 @@ public class Player extends Mob {
         // When press keys, move our player from here. Affects the entity x and y.
         // If user presses up+down at same time, this will effectively cancel movement and player will not move.
 
-        test.update();
+        if (walking) animSprite.update();
+        else animSprite.setFrame(0);
 
         if (fireRate > 0) fireRate--;
 
@@ -55,10 +62,23 @@ public class Player extends Mob {
         }else {
             anim = 0;
         }
-        if (input.up) ya--;
-        if (input.down) ya++;
-        if (input.left) xa--;
-        if (input.right) xa++;
+
+
+        if (input.up) {
+            ya--;
+            animSprite = up;
+        }else if (input.down){
+            ya++;
+            animSprite = down;
+        }
+
+        if (input.left){
+            animSprite = left;
+            xa--;
+        }else if (input.right){
+            animSprite = right;
+            xa++;
+        }
 
         if (xa != 0 || ya != 0){
             move(xa, ya);
@@ -97,53 +117,53 @@ public class Player extends Mob {
     // You don't wanna center it always to the player.
     public void render(Screen screen){
         int flip = 0;
-        if (dir == 0){
-            sprite = Sprite.player_forward;
-            if (walking){
-                if (anim % 20 > 10){
-                    sprite = Sprite.player_forward_1;
-                }else{
-                    sprite = Sprite.player_forward_2;
-                }
-            }
-        }
-
-        if(dir == 1){
-            sprite = Sprite.player_side;
-            if (walking){
-                if (anim % 20 > 10){
-                    sprite = Sprite.player_side_1;
-                }else{
-                    sprite = Sprite.player_side_2;
-                }
-            }
-        }
-
-        if (dir == 2) {
-            sprite = Sprite.player_back;
-            if (walking){
-                if (anim % 20 > 10){
-                    sprite = Sprite.player_back_1;
-                }else{
-                    sprite = Sprite.player_back_2;
-                }
-            }
-        }
-
-        if (dir == 3) {
-            sprite = Sprite.player_side;
-            flip = 1;
-            if (walking){
-                if (anim % 20 > 10){
-                    sprite = Sprite.player_side_1;
-                }else{
-                    sprite = Sprite.player_side_2;
-                }
-            }
-        }
+//        if (dir == 0){
+//            sprite = Sprite.player_forward;
+//            if (walking){
+//                if (anim % 20 > 10){
+//                    sprite = Sprite.player_forward_1;
+//                }else{
+//                    sprite = Sprite.player_forward_2;
+//                }
+//            }
+//        }
+//
+//        if(dir == 1){
+//            sprite = Sprite.player_side;
+//            if (walking){
+//                if (anim % 20 > 10){
+//                    sprite = Sprite.player_side_1;
+//                }else{
+//                    sprite = Sprite.player_side_2;
+//                }
+//            }
+//        }
+//
+//        if (dir == 2) {
+//            sprite = Sprite.player_back;
+//            if (walking){
+//                if (anim % 20 > 10){
+//                    sprite = Sprite.player_back_1;
+//                }else{
+//                    sprite = Sprite.player_back_2;
+//                }
+//            }
+//        }
+//
+//        if (dir == 3) {
+//            sprite = Sprite.player_side;
+//            flip = 1;
+//            if (walking){
+//                if (anim % 20 > 10){
+//                    sprite = Sprite.player_side_1;
+//                }else{
+//                    sprite = Sprite.player_side_2;
+//                }
+//            }
+//        }
 
         // Testing
-        sprite = test.getSprite();
+        sprite = animSprite.getSprite();
         //
         screen.renderPlayer(x-16, y-16, sprite, flip);
     }

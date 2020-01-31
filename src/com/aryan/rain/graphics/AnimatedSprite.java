@@ -25,7 +25,7 @@ public class AnimatedSprite extends Sprite {
             else frame++;
             sprite = sheet.getSprite()[frame];
         }
-        System.out.println(sprite + " " + frame);
+        // System.out.println(sprite + " " + frame);
     }
 
     public Sprite getSprite(){
@@ -36,4 +36,13 @@ public class AnimatedSprite extends Sprite {
         rate = frames;
     }
 
+    public void setFrame(int index) {
+        if (index > sheet.getSprite().length - 1) {
+            System.err.println("Index bounds error");
+            return;
+        }
+
+        sprite = sheet.getSprite()[index];
+
+    }
 }
