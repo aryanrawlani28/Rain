@@ -34,7 +34,7 @@ public class SpawnLevel extends Level{
 
         for (int i=0; i < Dummy.NO_OF_DUMMIES; i++) {
 //            add(new Dummy(random.nextInt(2) + 20, random.nextInt(7) + 59));
-            add(new Dummy(20, 59));
+            //add(new Dummy(20, 59));
         }
 
         for (int i=0; i < Chaser.NO_OF_CHASERS; i++) {

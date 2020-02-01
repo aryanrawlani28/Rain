@@ -52,13 +52,14 @@ public class Player extends Mob {
         // When press keys, move our player from here. Affects the entity x and y.
         // If user presses up+down at same time, this will effectively cancel movement and player will not move.
 
+        double speed = 1.25;
 
         if (walking) animSprite.update();
         else animSprite.setFrame(0);
 
         if (fireRate > 0) fireRate--;
 
-        int xa = 0, ya = 0;
+        double xa = 0, ya = 0;
         if (anim < 7500){
             anim++;
         }else {
@@ -67,19 +68,19 @@ public class Player extends Mob {
 
 
         if (input.up) {
-            ya-=2;
+            ya -= speed;
             animSprite = up;
         }else if (input.down){
-            ya+=2;
+            ya += speed;
             animSprite = down;
         }
 
         if (input.left){
             animSprite = left;
-            xa-=2;
+            xa -= speed;
         }else if (input.right){
             animSprite = right;
-            xa+=2;
+            xa += speed;
         }
 
         if (xa != 0 || ya != 0){
@@ -122,6 +123,6 @@ public class Player extends Mob {
 
         sprite = animSprite.getSprite();
 
-        screen.renderMob(x - 16, y - 16, sprite, flip);
+        screen.renderMob((int)(x - 16), (int)(y - 16), sprite, flip);
     }
 }

@@ -18,8 +18,10 @@ public class Chaser extends Mob{
 
     public static final int NO_OF_CHASERS = 1;
 
-    private int xa = 0;
-    private int ya = 0;
+    private double xa = 0;
+    private double ya = 0;
+
+    private double speed = 1;
 
     private int time = 0;
 
@@ -39,10 +41,10 @@ public class Chaser extends Mob{
 
         if (players.size() > 0) {
             Player player = players.get(0);
-            if (x < player.getX()) xa++;
-            if (x > player.getX()) xa--;
-            if (y < player.getY()) ya++;
-            if (y > player.getY()) ya--;
+            if (x < player.getX()) xa += speed;
+            if (x > player.getX()) xa -= speed;
+            if (y < player.getY()) ya += speed;
+            if (y > player.getY()) ya -= speed;
         }
 
         if (xa != 0 || ya != 0){
@@ -99,9 +101,6 @@ public class Chaser extends Mob{
     public void render(Screen screen) {
         sprite = animSprite.getSprite();
 
-        // (X, y) means it is offseted, since we render player and collisions at x-16
-        // If you keep it at x,y.. it basically acts as a companion (provided he spawns near you)
-        // TODO: Use x, y for Companion, and x-16 and y-16 for perfect collision and perfect matching
-        screen.renderMob(x , y,this);
+        screen.renderMob((int)x - 16 , (int)y - 16,this);
     }
 }

@@ -30,21 +30,41 @@ public abstract class Mob extends Entity {
         // 0 -> north. 1 -> east, 2 -> south, 3 -> west. Clockwise.
         if (xa > 0) dir = Direction.RIGHT;
         if (xa < 0) dir = Direction.LEFT;
-        if (ya > 0) dir = Direction.UP;
-        if (ya < 0) dir = Direction.DOWN;
+        if (ya > 0) dir = Direction.DOWN;
+        if (ya < 0) dir = Direction.UP;
 
+        // Allows 1,3,5..
+        // Not allow 0.4, 0.56...
+        // You don't have less than 1 px. no decimals, etc..
 
-        for (int x = 0; x < Math.abs(xa); x++){
-            if(!collision(abs(xa), abs(ya))) {
-                this.x += abs(xa);
+        while (xa != 0){
+            if (Math.abs(xa) > 1){
+                if(!collision(abs(xa), ya)) {
+                    this.x += abs(xa);
+                }
+                xa -= abs(xa);
+            }else{
+                if(!collision(abs(xa), ya)) {
+                    this.x += xa;
+                }
+                xa = 0;
             }
         }
 
-        for (int y = 0; y < Math.abs(ya); y++){
-            if(!collision(abs(xa), abs(ya))) {
-                this.y += abs(ya);
+        while (ya != 0){
+            if (Math.abs(ya) > 1){
+                if(!collision(xa, abs(ya))) {
+                    this.y += abs(ya);
+                }
+                ya -= abs(ya);
+            }else{
+                if(!collision(xa, abs(ya))) {
+                    this.y += ya;
+                }
+                ya = 0;
             }
         }
+
     }
 
     private int abs(double val){
@@ -56,7 +76,7 @@ public abstract class Mob extends Entity {
 
     public abstract void render(Screen screen);
 
-    protected void shoot(int x, int y, double dir){
+    protected void shoot(double x, double y, double dir){
         Projectile p = new WizardProjectile(x, y, dir);
         level.add(p);
     }
@@ -66,8 +86,8 @@ public abstract class Mob extends Entity {
         // boolean solid = false;
 
         for(int c = 0; c < 4; c++){
-            double xt = ((x+xa) + c % 2 * 16) / 16;     // 10 is the width of collision area
-            double yt = ((y+ya) + c / 2 * 16) / 16;
+            double xt = ((x+xa) - c % 2 * 16) / 16;     // 10 is the width of collision area
+            double yt = ((y+ya) - c / 2 * 16) / 16;
 
             int ix = (int) Math.ceil(xt);
             int iy = (int) Math.ceil(yt);
@@ -76,8 +96,6 @@ public abstract class Mob extends Entity {
             if (c / 2 == 0) iy = (int) Math.floor(yt);
 
             if (level.getTile(ix, iy).solid()) return true;
-
-            // if (level.getTile(xt, yt).solid() == true) return true;
         }
 
         return false;
