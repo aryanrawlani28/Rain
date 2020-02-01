@@ -2,21 +2,16 @@ package com.aryan.rain;
 
 import com.aryan.rain.entity.mob.Player;
 import com.aryan.rain.graphics.Screen;
-import com.aryan.rain.graphics.Sprite;
-import com.aryan.rain.graphics.SpriteSheet;
 import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.input.Mouse;
 import com.aryan.rain.level.Level;
-import com.aryan.rain.level.RandomLevel;
-import com.aryan.rain.level.SpawnLevel;
-import com.aryan.rain.level.TileCoordinate;
+import com.aryan.rain.graphics.Font;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.util.Random;
 
 public class Game extends Canvas implements Runnable{
 
@@ -33,6 +28,8 @@ public class Game extends Canvas implements Runnable{
     private Level level;                            // Only load one level at a time.
 
     private Player player;
+
+    private Font font;
 
     private Thread thread;
 
@@ -53,11 +50,13 @@ public class Game extends Canvas implements Runnable{
 
         key = new Keyboard();
 
+        font = new Font();
+
         level = Level.Spawn;
 
-        TileCoordinate playerSpawn = new TileCoordinate(20, 59);
+        // TileCoordinate playerSpawn = new TileCoordinate(20, 59);         // TODO: Issue #1 : Does not work
         player = new Player(20*16, 59*16, key);
-        // player.init(level);
+
         level.add(player);
 
         addKeyListener(key);
@@ -127,7 +126,6 @@ public class Game extends Canvas implements Runnable{
 
     public void update(){
         key.update();
-        // player.update();
         level.update();
     }
 
@@ -143,19 +141,6 @@ public class Game extends Canvas implements Runnable{
         double yScroll = player.getY() - screen.height / 2;
 
         level.render((int)xScroll, (int)yScroll, screen);
-        // player.render(screen);
-
-        //////////////////////// Particle graphics demo ////////////////////////
-
-//        Sprite sprite = new Sprite(40, 40, 0xFFFFFFFF);
-//        Random random = new Random();
-//        for (int i=0; i<100; i++) {
-//            int x = random.nextInt(20);
-//            int y = random.nextInt(20);
-//            screen.renderSprite(width-60+x, 50+y, sprite, true); // true -> stays static in one part of map
-//        }
-
-        //////////////////////////////////////////////////////////////////////
 
         for(int i=0; i<pixels.length; i++){
             pixels[i] = screen.pixels[i];
