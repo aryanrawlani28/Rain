@@ -169,7 +169,9 @@ public class Level {
         }
     }
 
+
     // For multiplayer, we can just make this a list and return that list.
+    @Deprecated
     public List<Player> getPlayers(){
 //        for (int i = 0; i < entities.size(); i++) {
 //            if (entities.get(i) instanceof Player) {
@@ -189,8 +191,58 @@ public class Level {
         return players.get(0);
     }
 
+    // Universal method to get all entities.
+    public List<Entity> getEntities(Entity e, int radius){
+        List<Entity> result = new ArrayList<>();
 
-    // We will render what this method returns. This converts arry to tiles.
+        int ex = e.getX();
+        int ey = e.getY();
+
+        for (int i=0; i<entities.size(); i++){
+            Entity entity = entities.get(i);
+            int x = entity.getX();
+            int y = entity.getY();
+
+            int dx = Math.abs(x - ex);
+            int dy = Math.abs(y - ey);
+
+            double dist = Math.sqrt((dx * dx) + (dy * dy));
+
+            if (dist <= radius){
+                result.add(entity);
+            }
+        }
+
+        return result;
+    }
+
+    public List<Player> getPlayers(Entity e, int radius){
+
+//        List<Entity> entities = getEntities(e, radius);
+        List<Player> result = new ArrayList<Player>();
+        int ex = e.getX();
+        int ey = e.getY();
+
+        for (int i=0; i<players.size(); i++){
+            Player player = players.get(i);
+            int x = player.getX();
+            int y = player.getY();
+
+            int dx = Math.abs(x - ex);
+            int dy = Math.abs(y - ey);
+
+            double dist = Math.sqrt((dx * dx) + (dy * dy));
+
+            if (dist <= radius){
+                result.add(player);
+            }
+        }
+
+        return result;
+    }
+
+
+    // We will render what this method returns. This converts array to tiles.
     public Tile getTile(int x, int y){
 
         if (x < 0 || y < 0 || x >= width || y >= height) return Tile.spawn_grass;

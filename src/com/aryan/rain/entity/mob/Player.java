@@ -1,6 +1,7 @@
 package com.aryan.rain.entity.mob;
 
 import com.aryan.rain.Game;
+import com.aryan.rain.entity.Entity;
 import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.entity.projectile.WizardProjectile;
 import com.aryan.rain.graphics.AnimatedSprite;
@@ -9,6 +10,8 @@ import com.aryan.rain.graphics.Sprite;
 import com.aryan.rain.graphics.SpriteSheet;
 import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.input.Mouse;
+
+import java.util.List;
 
 public class Player extends Mob {
 
@@ -48,6 +51,13 @@ public class Player extends Mob {
     public void update(){
         // When press keys, move our player from here. Affects the entity x and y.
         // If user presses up+down at same time, this will effectively cancel movement and player will not move.
+
+//        List<Entity> es = level.getEntities(this, 100);
+
+        // Foreach loop can cause concurrency issues, generally a good idea to avoid
+//        for (Entity e: es){
+//            System.out.println(e);
+//        }
 
         if (walking) animSprite.update();
         else animSprite.setFrame(0);

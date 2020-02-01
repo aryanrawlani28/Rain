@@ -5,6 +5,8 @@ import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.Sprite;
 import com.aryan.rain.graphics.SpriteSheet;
 
+import java.util.List;
+
 public class Chaser extends Mob{
 
     private AnimatedSprite down = new AnimatedSprite(SpriteSheet.dummy_down, 32, 32, 3);
@@ -33,12 +35,15 @@ public class Chaser extends Mob{
         xa = 0;
         ya = 0;
 
-        Player player = level.getClientPlayer();
+        List<Player> players = level.getPlayers(this, 50);
 
-        if (x < player.getX()) xa++;
-        if (x > player.getX()) xa--;
-        if (y < player.getY()) ya++;
-        if (y > player.getY()) ya--;
+        if (players.size() > 0) {
+            Player player = players.get(0);
+            if (x < player.getX()) xa++;
+            if (x > player.getX()) xa--;
+            if (y < player.getY()) ya++;
+            if (y > player.getY()) ya--;
+        }
 
         if (xa != 0 || ya != 0){
             move(xa, ya);
