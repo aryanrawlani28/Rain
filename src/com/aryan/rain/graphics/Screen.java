@@ -1,5 +1,7 @@
 package com.aryan.rain.graphics;
 
+import com.aryan.rain.entity.mob.Chaser;
+import com.aryan.rain.entity.mob.Mob;
 import com.aryan.rain.entity.mob.Player;
 import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.level.tile.Tile;
@@ -114,6 +116,39 @@ public class Screen {
                 int col = p.getSprite().pixels[x + y * p.getSprite().SIZE];
                 if (col != 0xFFFF00DC) pixels[xa + ya * width] = col;
 
+            }
+        }
+    }
+
+    public void renderMob(int xp, int yp, Mob mob){
+        xp -= xOffset;
+        yp -= yOffset;
+
+        for (int y = 0; y < 32; y++){                     //mostly tile size is 16. if increase size in future, no probs this way.
+
+            int ya = y + yp;
+            int ys = y;
+
+            // ys = 31 - y;                                                // instead of top to bottom, bottom to top.
+
+            for (int x = 0; x < 32; x++){                                   // same thing for x.
+
+                int xa = x + xp;                                            // xa = x absolute
+                int xs = x;
+                // xs = 31 - x;
+
+                if (xa < -32 || xa >= width || ya < 0 || ya >= height){    // maps are going to be infinite? (Come back to this later #29) are easier?
+                    break;
+                }
+                if (xa < 0) xa = 0;
+
+                int col = mob.getSprite().pixels[xs+ys*32];
+
+                if ((mob instanceof Chaser) && col == 0xff472bbf) col = 0xFFBA0015; // if chaser mob, change to cloak to red.
+
+                if (col != -65281) {
+                    pixels[xa + ya * width] = col;
+                }
             }
         }
     }

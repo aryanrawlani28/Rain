@@ -7,7 +7,7 @@ import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.Sprite;
 
 public abstract class Mob extends Entity {
-    protected Sprite sprite;
+    // protected Sprite sprite;
     protected boolean walking = false;   // Mobs usually have moving animations
 
     protected enum Direction{
