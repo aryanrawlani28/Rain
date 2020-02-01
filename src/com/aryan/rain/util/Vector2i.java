@@ -76,6 +76,15 @@ public class Vector2i {
         return this;
     }
 
+    public static double getDistance(Vector2i v0, Vector2i v1){
+
+        // double distance = 0;
+        double x = v0.getX() - v1.getX();
+        double y = v0.getY() - v1.getY();
+        return Math.sqrt(x*x + y*y);        // Manhattan distance would return x+y, maybe in future.
+
+    }
+
     public boolean equals(Object object){
 
         if (!(object instanceof Vector2i)) return false;

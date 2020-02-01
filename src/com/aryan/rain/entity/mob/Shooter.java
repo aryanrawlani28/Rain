@@ -1,9 +1,13 @@
 package com.aryan.rain.entity.mob;
 
+import com.aryan.rain.entity.Entity;
 import com.aryan.rain.graphics.AnimatedSprite;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.Sprite;
 import com.aryan.rain.graphics.SpriteSheet;
+import com.aryan.rain.util.Vector2i;
+
+import java.util.List;
 
 public class Shooter extends Mob {
 
@@ -71,17 +75,33 @@ public class Shooter extends Mob {
             walking = false;
         }
 
+        List<Entity> entities = level.getEntities(this, 500);
+        entities.add(level.getClientPlayer());
 
-        Player p = level.getClientPlayer();
-        int px = (int) p.getX();
-        int py = (int) p.getY();
+        double min = 0;
+        Entity closest = null;
+        for (int i=0; i < entities.size(); i++){
+            Entity e = entities.get(i);
+            double distance = Vector2i.getDistance(new Vector2i((int)x, (int)y), new Vector2i((int)e.getX(), (int)e.getY()));
 
-        double dx = (px - this.x);
-        double dy = (py - this.y);
+            if (i==0 || distance < min) {
+                min = distance;
+                closest = e;
+            }
 
-        double dir = Math.atan2(dy, dx);
+        }
 
-        shoot(x, y, dir);
+        if (closest != null) {
+            int px = (int) closest.getX();
+            int py = (int) closest.getY();
+
+            double dx = (px - this.x);
+            double dy = (py - this.y);
+
+            double dir = Math.atan2(dy, dx);
+
+            shoot(x, y, dir);
+        }
     }
 
     // Visual stuff
