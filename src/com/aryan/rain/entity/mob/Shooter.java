@@ -5,6 +5,7 @@ import com.aryan.rain.graphics.AnimatedSprite;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.Sprite;
 import com.aryan.rain.graphics.SpriteSheet;
+import com.aryan.rain.util.Debug;
 import com.aryan.rain.util.Vector2i;
 
 import java.util.List;
@@ -78,8 +79,8 @@ public class Shooter extends Mob {
             walking = false;
         }
 
-        // shootClosest();
-        shootRandom();
+        shootClosest();
+        // shootRandom();
     }
 
     private void shootRandom() {
@@ -138,6 +139,7 @@ public class Shooter extends Mob {
     // Visual stuff
     public void render(Screen screen) {
         sprite = animSprite.getSprite();
+        Debug.drawRect(screen, 40, 40, 100, 40,true);
         screen.renderMob((int)x - 16,(int)y - 16,this);
     }
 }
