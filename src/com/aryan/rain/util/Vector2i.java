@@ -67,13 +67,24 @@ public class Vector2i {
     }
 
     public Vector2i dotProduct(){
-
+        // TODO: Add dot product
         return this;
     }
 
     public Vector2i crossProduct(){
-
+        // TODO: Add cross product
         return this;
+    }
+
+    public boolean equals(Object object){
+
+        if (!(object instanceof Vector2i)) return false;
+
+        Vector2i vec = (Vector2i) object;
+
+        if (vec.getX() == this.x && vec.getY() == this.y) return true;
+
+        return false;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////

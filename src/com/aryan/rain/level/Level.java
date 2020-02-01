@@ -9,9 +9,9 @@ import com.aryan.rain.entity.particle.Particle;
 import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.level.tile.Tile;
+import com.aryan.rain.util.Vector2i;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 // Manages which tiles need to be rendered.
 public class Level {
@@ -170,7 +170,6 @@ public class Level {
     }
 
 
-    // For multiplayer, we can just make this a list and return that list.
     @Deprecated
     public List<Player> getPlayers(){
 //        for (int i = 0; i < entities.size(); i++) {
@@ -190,6 +189,129 @@ public class Level {
     public Player getClientPlayer(){
         return players.get(0);
     }
+
+
+
+
+    /////////////////////////////////// A* Algorithm ///////////////////////////////////
+
+    // Takes in 2 objs, and based on our info returns an int.
+    private Comparator<Node> nodeSorter = new Comparator<Node>() {
+        @Override
+        public int compare(Node n0, Node n1) {
+
+            // Sort by fCost for the shortest
+            if (n1.fCost < n0.fCost) return +1; // Move up in index
+
+            if (n1.fCost > n0.fCost) return -1; // Otherwise move down
+
+            return 0;
+        }
+    };
+
+    public List<Node> findPath(Vector2i start, Vector2i goal){
+
+        // All adj are being considered one by one from openlist.
+
+        List<Node> openList = new ArrayList<>();            // Every tile is in openlist, we're considering.
+        List<Node> closedList = new ArrayList<>();          // One by one remove from open and add to closed
+
+        Node current = new Node(start, null, 0, getDistance(start, goal));
+
+        openList.add(current);
+
+
+        // Working out stuf::
+        while (openList.size() > 0){
+
+            Collections.sort(openList, nodeSorter);     // Sorts node acc to our comparator.
+
+            current = openList.get(0);                  // We're getting the first, because we're gonna sort them out closest to first. That's why consider the closest first. Perf++;
+
+            // As soon as we find a path, get away. Finish.
+            if (current.tile.equals(goal)){
+
+                // Return here. Path reconstruction.
+                List<Node> path = new ArrayList<Node>();
+
+                while (current.parent != null){
+                    path.add(current);
+                    current = current.parent;
+                }
+
+                path.add(current);      // To add the start, whose parent is actually null.
+
+
+                openList.clear();
+                closedList.clear();
+
+                return path;
+            }
+
+            openList.remove(current);
+            closedList.add(current);                        // Tiles already checked here.
+
+            // Uptill now we've checked all adj nodes.
+
+            for (int i=0; i < 9; i++){
+
+                if (i == 4) continue;                        // Middle, we're currently here.
+
+                int x = current.tile.getX();
+                int y = current.tile.getY();
+
+                int xi = (i % 3) - 1;                         // Checking neighbours
+                int yi = (i / 3) - 1;
+
+                Tile at = getTile(x + xi, y + yi);      // Will be every tile in the list.
+
+                if (at == null) continue;
+                if (at.solid()) continue;
+
+                Vector2i a = new Vector2i(x+xi, y+yi);  // Same tile, but in vect form.
+
+                // Only immediate distances are being compared
+                double gCost = current.gCost + getDistance(current.tile, a);
+                double hCost = getDistance(a, goal);
+
+                // Next tile is "a", and we make the current one the parent of it.
+                // We've also computed hCost and gCost.
+                Node node = new Node(a, current, gCost, hCost);
+
+                // If we've already been there, don't add to list.
+                // BUT, in some cases, can reopen and visit through there because no other possibility exists.
+                if (vecInList(closedList, a) && gCost >= node.gCost) continue;
+
+                // if vec is not in openlist, add it.
+                if (!vecInList(openList, a) || gCost < node.gCost) openList.add(node);
+            }
+
+
+        }
+
+        closedList.clear();
+        return null;
+    }
+
+    private double getDistance(Vector2i tile, Vector2i goal){
+
+        double dx = tile.getX() - goal.getX();
+        double dy = tile.getY() - goal.getY();
+
+        return Math.sqrt(dx * dx + dy * dy);
+
+    }
+
+    private boolean vecInList(List<Node> list, Vector2i v){
+        for (Node n : list){
+            if (n.tile.equals(v)) return true;
+        }
+        return false;
+    }
+
+    /////////////////////////////////////////////////////////////////////////////
+
+
 
     // Universal method to get all entities.
     public List<Entity> getEntities(Entity e, int radius){
