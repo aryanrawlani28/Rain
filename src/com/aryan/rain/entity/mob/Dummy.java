@@ -14,6 +14,11 @@ public class Dummy extends Mob{
 
     private AnimatedSprite animSprite = down;
 
+    private int xa = 0;
+    private int ya = 0;
+
+    private int time = 0;
+
     public Dummy(int x, int y){
         // X, Y are spawning locations of NPCs
 
@@ -24,7 +29,21 @@ public class Dummy extends Mob{
 
     @Override
     public void update() {
-        int xa = 0, ya = 0;
+        time++;         // 60 inc per second. time & 60 == 0 -> once per second ie. one sec
+
+        if (time % (random.nextInt(90) + 30) == 0){
+//            xa = -xa;
+//            ya = -ya;
+            xa = random.nextInt(3) - 1;     // -1 = left, 0 = stationary, 1 = right
+            ya = random.nextInt(3) - 1;
+
+            if (random.nextInt(4) == 0){
+                xa = 0;
+                ya = 0;
+            }
+        }
+
+
 
         // boolean walking = false;
         if (walking) animSprite.update();
