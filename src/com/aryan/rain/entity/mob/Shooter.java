@@ -8,6 +8,7 @@ import com.aryan.rain.graphics.SpriteSheet;
 import com.aryan.rain.util.Vector2i;
 
 import java.util.List;
+import java.util.Random;
 
 public class Shooter extends Mob {
 
@@ -22,6 +23,8 @@ public class Shooter extends Mob {
     private AnimatedSprite right = new AnimatedSprite(SpriteSheet.dummy_right, 32, 32, 3);
 
     private AnimatedSprite animSprite = down;
+
+    Entity rand = null;
 
     public Shooter(int x, int y){
         this.x = x << 4;
@@ -75,7 +78,35 @@ public class Shooter extends Mob {
             walking = false;
         }
 
-        List<Entity> entities = level.getEntities(this, 500);
+        // shootClosest();
+        shootRandom();
+    }
+
+    private void shootRandom() {
+        if (time % (30 + random.nextInt(60)) == 0) {
+            List<Entity> entities = level.getEntities(this, 200);
+            entities.add(level.getClientPlayer());
+
+            int index = random.nextInt(entities.size());
+
+            rand = entities.get(index);
+        }
+
+        if (rand != null) {
+            int px = (int) rand.getX();
+            int py = (int) rand.getY();
+
+            double dx = (px - this.x);
+            double dy = (py - this.y);
+
+            double dir = Math.atan2(dy, dx);
+
+            shoot(x, y, dir);
+        }
+    }
+
+    private void shootClosest(){
+        List<Entity> entities = level.getEntities(this, 200);
         entities.add(level.getClientPlayer());
 
         double min = 0;
