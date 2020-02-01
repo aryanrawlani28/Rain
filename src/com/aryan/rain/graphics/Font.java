@@ -9,7 +9,7 @@ public class Font{
     public Font(){}
 
     public void render(Screen screen){
-//        screen.renderSprite(50,50, characters[0]);
+        screen.renderSprite(50,50, characters[0], false);
     }
 
 }

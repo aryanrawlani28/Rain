@@ -50,14 +50,14 @@ public class Game extends Canvas implements Runnable{
 
         key = new Keyboard();
 
-        font = new Font();
-
         level = Level.Spawn;
 
         // TileCoordinate playerSpawn = new TileCoordinate(20, 59);         // TODO: Issue #1 : Does not work
         player = new Player(20*16, 59*16, key);
 
         level.add(player);
+
+        font = new Font();
 
         addKeyListener(key);
 
@@ -141,6 +141,8 @@ public class Game extends Canvas implements Runnable{
         double yScroll = player.getY() - screen.height / 2;
 
         level.render((int)xScroll, (int)yScroll, screen);
+
+        font.render(screen);
 
         for(int i=0; i<pixels.length; i++){
             pixels[i] = screen.pixels[i];

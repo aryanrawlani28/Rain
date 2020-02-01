@@ -143,7 +143,10 @@ public class Sprite {
         this.width = width;
         this.height = height;
 
-        this.pixels = pixels;
+        this.pixels = new int[pixels.length];
+        for (int i=0; i < pixels.length; i++){
+            this.pixels[i] = pixels[i];
+        }
 
     }
 
