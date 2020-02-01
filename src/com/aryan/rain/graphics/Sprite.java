@@ -147,6 +147,36 @@ public class Sprite {
 
     }
 
+    public static Sprite[] split(SpriteSheet sheet) {
+
+        int amount = ((sheet.getWidth() * sheet.getHeight()) / (sheet.SPRITE_WIDTH * sheet.SPRITE_HEIGHT));
+        Sprite[] sprites = new Sprite[amount];
+        int current = 0;
+
+        int[] pixels = new int[sheet.SPRITE_WIDTH * sheet.SPRITE_HEIGHT];
+
+        for (int yp = 0; yp < sheet.getWidth() / sheet.SPRITE_HEIGHT; yp++){
+            // go upto 5
+            for (int xp = 0; xp < sheet.getWidth() / sheet.SPRITE_WIDTH; xp++){
+                // go upto 13.
+                // above 2 loops identify where we are -> tile precision. eg A is at 0,0
+
+                // below 2 loops take that tile of 16x16 and copy all to pixel-precision
+                for (int y = 0; y<sheet.SPRITE_HEIGHT; y++){
+                    for (int x = 0; x<sheet.SPRITE_WIDTH; x++){
+                        int x0 = x + xp * sheet.SPRITE_WIDTH;
+                        int y0 = y + yp * sheet.SPRITE_HEIGHT;
+                        pixels[x+y * sheet.SPRITE_WIDTH] = sheet.getPixels()[(x0 + y0 * sheet.getWidth())];
+                    }
+                }
+
+                sprites[current++] = new Sprite(pixels, sheet.SPRITE_WIDTH, sheet.SPRITE_HEIGHT);
+            }
+        }
+
+        return sprites;
+    }
+
     // Fill pixel array with some color
     private void setColor(int color) {
         for (int i = 0; i < width * height; i++){
@@ -166,7 +196,7 @@ public class Sprite {
         for(int y=0; y<height; y++){
             for(int x=0; x < width; x++){
                 // Basically extract a single sprite out of the spritesheet. (Spritesheet has multiple sprites)
-                pixels[x + y * width] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.WIDTH];
+                pixels[x + y * width] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SPRITE_WIDTH];
             }
         }
     }

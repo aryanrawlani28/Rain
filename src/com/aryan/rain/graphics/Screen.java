@@ -2,7 +2,6 @@ package com.aryan.rain.graphics;
 
 import com.aryan.rain.entity.mob.Chaser;
 import com.aryan.rain.entity.mob.Mob;
-import com.aryan.rain.entity.mob.Player;
 import com.aryan.rain.entity.mob.Star;
 import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.level.tile.Tile;
@@ -45,12 +44,12 @@ public class Screen {
             yp -= yOffset;
         }
 
-        for (int y = 0; y < sheet.HEIGHT; y++){
+        for (int y = 0; y < sheet.SPRITE_HEIGHT; y++){
             int ya = y + yp;
-            for (int x = 0; x < sheet.WIDTH; x++){
+            for (int x = 0; x < sheet.SPRITE_WIDTH; x++){
                 int xa = x + xp;
                 if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
-                pixels[xa+ya*width] = sheet.pixels[x+y*sheet.WIDTH];
+                pixels[xa+ya*width] = sheet.pixels[x+y*sheet.SPRITE_WIDTH];
             }
         }
 

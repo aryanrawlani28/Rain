@@ -15,7 +15,9 @@ public class SpriteSheet {
     private String path; //Path to spritesheet
 
     public final int SIZE;
-    public final int WIDTH, HEIGHT;
+    public final int SPRITE_WIDTH, SPRITE_HEIGHT;     // Size of sprite
+
+    private int width, height;
 
     public int[] pixels;
 
@@ -53,8 +55,8 @@ public class SpriteSheet {
         if (width == height) SIZE = width;
         else SIZE = -1;
 
-        this.WIDTH = w;
-        this.HEIGHT = h;
+        this.SPRITE_WIDTH = w;
+        this.SPRITE_HEIGHT = h;
 
         pixels = new int[w*h];
 
@@ -62,7 +64,7 @@ public class SpriteSheet {
             int yp = yy + y0;
             for (int x0 = 0; x0 < w; x0++){
                 int xp = xx + x0;
-                pixels[x0 + y0 * w] = sheet.pixels[xp + yp * sheet.WIDTH];
+                pixels[x0 + y0 * w] = sheet.pixels[xp + yp * sheet.SPRITE_WIDTH];
             }
         }
 
@@ -81,12 +83,11 @@ public class SpriteSheet {
                 for (int y0 = 0; y0 < spriteSize; y0++){
                     for (int x0 = 0; x0 < spriteSize; x0++){
                         // We're advancing horizontally first, row by row
-                        spritePixels[x0 + y0 * spriteSize] = pixels[(x0 + xa * spriteSize) + (y0 + ya * spriteSize) * this.WIDTH];   // Remember to offset by the actual position in the sheet
+                        spritePixels[x0 + y0 * spriteSize] = pixels[(x0 + xa * spriteSize) + (y0 + ya * spriteSize) * this.SPRITE_WIDTH];   // Remember to offset by the actual position in the sheet
                     }
                 }
                 Sprite sprite = new Sprite(spritePixels, spriteSize, spriteSize);
                 sprites[frame++] = sprite;
-                // if (frame >= 3072) break;
 
             }
         }
@@ -97,8 +98,8 @@ public class SpriteSheet {
     public SpriteSheet(String path, int size){
         this.path = path;
         this.SIZE = size;
-        this.HEIGHT = size;
-        this.WIDTH = size;
+        this.SPRITE_HEIGHT = size;
+        this.SPRITE_WIDTH = size;
 
         pixels = new int[SIZE*SIZE];
         load(path);
@@ -108,10 +109,10 @@ public class SpriteSheet {
         this.path = path;
 
         this.SIZE = -1;
-        this.WIDTH = width;
-        this.HEIGHT = height;
+        this.SPRITE_WIDTH = width;
+        this.SPRITE_HEIGHT = height;
 
-        pixels = new int[WIDTH*HEIGHT];
+        pixels = new int[SPRITE_WIDTH * SPRITE_HEIGHT];
         load(path);
     }
 
@@ -119,20 +120,37 @@ public class SpriteSheet {
         return sprites;
     }
 
+    public int getWidth(){
+        return width;
+    }
+
+    public int getHeight(){
+        return height;
+    }
+
+    public int[] getPixels() {
+        return pixels;
+    }
+
     // Load the image file
     private void load(String path){
         try {
+            System.out.print("Trying to load: " + path + "...");
             BufferedImage image = ImageIO.read(new File(path));
+            System.out.println(" succeeded!");
+
+
 
             //we wanna deal with images in pixels
-            int w = image.getWidth();
-            int h = image.getHeight();
+            int width = image.getWidth();
+            int height = image.getHeight();
 
             // Convert image to pixels. Now I can use these pixels individually
-            image.getRGB(0, 0, w, h, pixels, 0, w);
+            image.getRGB(0, 0, width, height, pixels, 0, width);
 
         }catch (IOException e){
             e.printStackTrace();
+            System.err.println("Failed!!");
         }
     }
 }
