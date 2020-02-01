@@ -239,9 +239,6 @@ public class Level {
                     current = current.parent;
                 }
 
-                path.add(current);      // To add the start, whose parent is actually null.
-
-
                 openList.clear();
                 closedList.clear();
 
