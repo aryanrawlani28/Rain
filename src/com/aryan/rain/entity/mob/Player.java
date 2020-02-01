@@ -52,12 +52,6 @@ public class Player extends Mob {
         // When press keys, move our player from here. Affects the entity x and y.
         // If user presses up+down at same time, this will effectively cancel movement and player will not move.
 
-//        List<Entity> es = level.getEntities(this, 100);
-
-        // Foreach loop can cause concurrency issues, generally a good idea to avoid
-//        for (Entity e: es){
-//            System.out.println(e);
-//        }
 
         if (walking) animSprite.update();
         else animSprite.setFrame(0);
@@ -73,19 +67,19 @@ public class Player extends Mob {
 
 
         if (input.up) {
-            ya--;
+            ya-=2;
             animSprite = up;
         }else if (input.down){
-            ya++;
+            ya+=2;
             animSprite = down;
         }
 
         if (input.left){
             animSprite = left;
-            xa--;
+            xa-=2;
         }else if (input.right){
             animSprite = right;
-            xa++;
+            xa+=2;
         }
 
         if (xa != 0 || ya != 0){
@@ -128,6 +122,6 @@ public class Player extends Mob {
 
         sprite = animSprite.getSprite();
 
-        screen.renderMob(x-16, y-16, sprite, flip);
+        screen.renderMob(x - 16, y - 16, sprite, flip);
     }
 }
