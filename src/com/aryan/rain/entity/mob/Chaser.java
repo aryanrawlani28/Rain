@@ -14,6 +14,8 @@ public class Chaser extends Mob{
 
     private AnimatedSprite animSprite = down;
 
+    public static final int NO_OF_CHASERS = 1;
+
     private int xa = 0;
     private int ya = 0;
 
@@ -27,8 +29,31 @@ public class Chaser extends Mob{
 
     }
 
+    private void move() {
+        xa = 0;
+        ya = 0;
+
+        Player player = level.getClientPlayer();
+
+        if (x < player.getX()) xa++;
+        if (x > player.getX()) xa--;
+        if (y < player.getY()) ya++;
+        if (y > player.getY()) ya--;
+
+        if (xa != 0 || ya != 0){
+            move(xa, ya);
+            walking = true;
+        }else {
+            walking = false;
+        }
+
+
+
+    }
+
     @Override
     public void update() {
+        move();
         time++;         // 60 inc per second. time & 60 == 0 -> once per second ie. one sec
 
         if (time % (random.nextInt(90) + 30) == 0){
@@ -63,18 +88,15 @@ public class Chaser extends Mob{
             animSprite = right;
             dir = Direction.RIGHT;
         }
-
-        if (xa != 0 || ya != 0){
-            move(xa, ya);
-            walking = true;
-        }else {
-            walking = false;
-        }
     }
 
     @Override
     public void render(Screen screen) {
         sprite = animSprite.getSprite();
-        screen.renderMob(x,y,this);
+
+        // (X, y) means it is offseted, since we render player and collisions at x-16
+        // If you keep it at x,y.. it basically acts as a companion (provided he spawns near you)
+        // TODO: Use x, y for Companion, and x-16 and y-16 for perfect collision and perfect matching
+        screen.renderMob(x , y,this);
     }
 }

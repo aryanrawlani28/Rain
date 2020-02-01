@@ -9,7 +9,7 @@ import java.util.Random;
 
 // A Entity doesn't necessarily have sprites.
 public class Entity {
-    public int x, y;
+    protected int x, y;
     protected Sprite sprite;
     private boolean removed = false;
     protected Level level;
@@ -34,6 +34,14 @@ public class Entity {
     // Remove entity from level
     public void remove(){
         removed = true;
+    }
+
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
     }
 
     public Sprite getSprite(){

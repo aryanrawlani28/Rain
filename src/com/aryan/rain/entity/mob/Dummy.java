@@ -14,6 +14,8 @@ public class Dummy extends Mob{
 
     private AnimatedSprite animSprite = down;
 
+    public static final int NO_OF_DUMMIES = 5;
+
     private int xa = 0;
     private int ya = 0;
 

@@ -47,7 +47,6 @@ public class Game extends Canvas implements Runnable{
     public Game(){
         Dimension size = new Dimension(width*scale, height*scale);
         setPreferredSize(size);
-
         screen = new Screen(width, height);
 
         frame = new JFrame();
@@ -58,7 +57,8 @@ public class Game extends Canvas implements Runnable{
 
         TileCoordinate playerSpawn = new TileCoordinate(20, 59);
         player = new Player(20*16, 59*16, key);
-        player.init(level);
+        // player.init(level);
+        level.add(player);
 
         addKeyListener(key);
 
@@ -127,7 +127,7 @@ public class Game extends Canvas implements Runnable{
 
     public void update(){
         key.update();
-        player.update();
+        // player.update();
         level.update();
     }
 
@@ -139,11 +139,11 @@ public class Game extends Canvas implements Runnable{
         }
         screen.clear();
 
-        int xScroll = player.x - screen.width / 2;
-        int yScroll = player.y - screen.height / 2;
+        int xScroll = player.getX() - screen.width / 2;
+        int yScroll = player.getY() - screen.height / 2;
 
         level.render(xScroll, yScroll, screen);
-        player.render(screen);
+        // player.render(screen);
 
         //////////////////////// Particle graphics demo ////////////////////////
 

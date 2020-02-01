@@ -4,6 +4,7 @@ package com.aryan.rain.level;
 // L2: Map level
 
 import com.aryan.rain.entity.Entity;
+import com.aryan.rain.entity.mob.Player;
 import com.aryan.rain.entity.particle.Particle;
 import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.graphics.Screen;
@@ -23,6 +24,7 @@ public class Level {
     private List<Entity> entities = new ArrayList<Entity>();
     private List<Projectile> projectiles = new ArrayList<Projectile>();
     private List<Particle> particles = new ArrayList<Particle>();
+    private List<Player> players = new ArrayList<Player>();
 
     public static Level Spawn = new SpawnLevel("res/levels/spawn_level.png");
 
@@ -83,6 +85,14 @@ public class Level {
             }
         }
 
+        for (int l=0; l < players.size(); l++) {
+            if (players.get(l).isRemoved()){
+                players.remove(l);
+            }else{
+                players.get(l).update();
+            }
+        }
+
         remove();
     }
 
@@ -138,6 +148,10 @@ public class Level {
         for (int k=0; k < particles.size(); k++) {
             particles.get(k).render(screen);
         }
+
+        for (int l=0; l < players.size(); l++) {
+            players.get(l).render(screen);
+        }
     }
 
 
@@ -148,9 +162,31 @@ public class Level {
             particles.add((Particle) e);
         }else if (e instanceof Projectile){
             projectiles.add((Projectile) e);
-        }else {
+        }else if(e instanceof Player){
+            players.add((Player) e);
+        }else{
             entities.add(e);
         }
+    }
+
+    // For multiplayer, we can just make this a list and return that list.
+    public List<Player> getPlayers(){
+//        for (int i = 0; i < entities.size(); i++) {
+//            if (entities.get(i) instanceof Player) {
+//                return (Player) entities.get(i);
+//            }
+//        }
+//
+//        return null;
+        return players;
+    }
+
+    public Player getPlayerAt(int i){
+        return players.get(i);
+    }
+
+    public Player getClientPlayer(){
+        return players.get(0);
     }
 
 
