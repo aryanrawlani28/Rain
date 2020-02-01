@@ -2,6 +2,7 @@ package com.aryan.rain.level;
 
 import com.aryan.rain.entity.mob.Chaser;
 import com.aryan.rain.entity.mob.Dummy;
+import com.aryan.rain.entity.mob.Star;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -38,7 +39,11 @@ public class SpawnLevel extends Level{
         }
 
         for (int i=0; i < Chaser.NO_OF_CHASERS; i++) {
-            add(new Chaser(20, 59));
+            // add(new Chaser(20, 59));
+        }
+
+        for (int i = 0; i < Star.NO_OF_STAR; i++) {
+            add(new Star(17, 35));
         }
     }
 

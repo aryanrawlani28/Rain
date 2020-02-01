@@ -3,6 +3,7 @@ package com.aryan.rain.graphics;
 import com.aryan.rain.entity.mob.Chaser;
 import com.aryan.rain.entity.mob.Mob;
 import com.aryan.rain.entity.mob.Player;
+import com.aryan.rain.entity.mob.Star;
 import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.level.tile.Tile;
 
@@ -145,6 +146,8 @@ public class Screen {
                 int col = mob.getSprite().pixels[xs+ys*32];
 
                 if ((mob instanceof Chaser) && col == 0xff472bbf) col = 0xFFBA0015; // if chaser mob, change to cloak to red.
+
+                if ((mob instanceof Star) && col == 0xff472bbf) col = 0xFFD8D83A; // if chaser mob, change to cloak to red.
 
                 if (col != -65281) {
                     pixels[xa + ya * width] = col;
