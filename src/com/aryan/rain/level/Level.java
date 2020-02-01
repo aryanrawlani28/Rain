@@ -269,6 +269,7 @@ public class Level {
 
                 // Only immediate distances are being compared
                 double gCost = current.gCost + getDistance(current.tile, a);
+                //double gCost = current.gCost + getDistance(current.tile, a) == 1 ? 1 : 0.95;
                 double hCost = getDistance(a, goal);
 
                 // Next tile is "a", and we make the current one the parent of it.
@@ -294,9 +295,11 @@ public class Level {
 
         double dx = tile.getX() - goal.getX();
         double dy = tile.getY() - goal.getY();
+        double distance = Math.sqrt(dx * dx + dy * dy);
+//        if (distance == 1) return 1;
+//        return 0.95;
 
-        return Math.sqrt(dx * dx + dy * dy);
-
+        return distance;
     }
 
     private boolean vecInList(List<Node> list, Vector2i v){

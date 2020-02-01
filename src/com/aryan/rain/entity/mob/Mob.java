@@ -86,8 +86,8 @@ public abstract class Mob extends Entity {
         // boolean solid = false;
 
         for(int c = 0; c < 4; c++){
-            double xt = ((x+xa) - c % 2 * 16) / 16;     // 10 is the width of collision area
-            double yt = ((y+ya) - c / 2 * 16) / 16;
+            double xt = ((x+xa) - c % 2 * 15) / 16;     // 10 is the width of collision area
+            double yt = ((y+ya) - c / 2 * 15) / 16;
 
             int ix = (int) Math.ceil(xt);
             int iy = (int) Math.ceil(yt);
