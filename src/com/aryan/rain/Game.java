@@ -142,7 +142,7 @@ public class Game extends Canvas implements Runnable{
 
         level.render((int)xScroll, (int)yScroll, screen);
 
-        font.render(screen);
+        font.render("Hello", screen);
 
         for(int i=0; i<pixels.length; i++){
             pixels[i] = screen.pixels[i];

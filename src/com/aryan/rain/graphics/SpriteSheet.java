@@ -144,6 +144,7 @@ public class SpriteSheet {
             //we wanna deal with images in pixels
             int width = image.getWidth();
             int height = image.getHeight();
+            System.out.println("Width: " + width + "Height: " + height);
 
             // Convert image to pixels. Now I can use these pixels individually
             image.getRGB(0, 0, width, height, pixels, 0, width);
