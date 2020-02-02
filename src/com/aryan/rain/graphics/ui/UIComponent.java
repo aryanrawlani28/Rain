@@ -41,6 +41,10 @@ public class UIComponent {
 
     }
 
+    public Vector2i getAbsolutePosition(){
+        return new Vector2i(pos).add(offset);
+    }
+
     void setOffset(Vector2i offset){
         this.offset = offset;
     }

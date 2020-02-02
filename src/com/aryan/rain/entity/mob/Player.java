@@ -77,8 +77,13 @@ public class Player extends Mob {
 
 //        uiHealthBar.setProgress(1.0);
 
-        button = new UIButton(new Vector2i(10, 260), new Vector2i(100, 30));
-        button.setText("Noob");
+        button = new UIButton(new Vector2i(10, 260), new Vector2i(100, 30), new UIActionListener() {
+            @Override
+            public void perform() {
+                System.out.println("Button has been pressed");
+            }
+        });
+        button.setText("Button");
         panel.addComponent(button);
     }
 

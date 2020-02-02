@@ -62,7 +62,7 @@ public class Game extends Canvas implements Runnable{
 
         level.add(player);
 
-        font = new Font();
+//        font = new Font();
 
         addKeyListener(key);
 
