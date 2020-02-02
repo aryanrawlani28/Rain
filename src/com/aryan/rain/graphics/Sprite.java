@@ -70,6 +70,7 @@ public class Sprite {
     ////////////////////////////// PROJECTILE SPRITES /////////////////////////////////////
 
     public static Sprite projectile_wizard = new Sprite(16, 0, 0, SpriteSheet.projectile_wizard);
+    public static Sprite projectile_arrow = new Sprite(16, 1, 0, SpriteSheet.projectile_wizard);
 
     //////////////////////////////////////////////////////////////////////////////////////////
 

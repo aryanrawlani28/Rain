@@ -12,7 +12,7 @@ public class WizardProjectile extends Projectile{
     public WizardProjectile(double x, double y, double dir) {
         super(x, y, dir);
         range = 200;
-        speed = 4;
+        speed = 2;
         damage = 20;
 
         sprite = Sprite.projectile_wizard;
@@ -57,6 +57,6 @@ public class WizardProjectile extends Projectile{
     }
 
     public void render(Screen screen){
-        screen.renderProjectile((int)x - 12, (int)y - 2, this);    // When render, we need int.
+        screen.renderProjectile((int)x - 12, (int)y - 2, this, angle);    // When render, we need int.
     }
 }

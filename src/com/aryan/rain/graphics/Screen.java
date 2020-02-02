@@ -123,6 +123,93 @@ public class Screen {
         }
     }
 
+    // angle is in radians
+    public void renderProjectile(int xp, int yp, Projectile p, double angle){
+        xp -= xOffset;
+        yp -= yOffset;
+
+        for (int y = 0; y < p.getSpriteSize(); y++){                     //mostly tile size is 16. if increase size in future, no probs this way.
+
+            int ya = y + yp;
+
+            for (int x = 0; x < p.getSpriteSize(); x++){                 // same thing for x.
+
+                int xa = x + xp;                                        // xa = x absolute
+                if (xa < -p.getSpriteSize() || xa >= width || ya < 0 || ya >= height){    // maps are going to be infinite? (Come back to this later #29) are easier?
+                    break;
+                }
+                if (xa < 0) xa = 0;
+
+                int[] rpixels = rotate(p.getSprite().pixels, p.getSpriteSize(), p.getSpriteSize(), angle);
+
+                int col = rpixels[x + y * p.getSprite().SIZE];
+                if (col != 0xFFFF00DC) pixels[xa + ya * width] = col;
+
+            }
+        }
+    }
+
+    private int[] rotate(int[] pixels, int width, int height, double angle){
+        int[] result = new int[width*height];
+
+        double nx_x = rot_x(-angle, 1.0, 0.0);
+        double nx_y = rot_y(-angle, 1.0, 0.0);
+
+        double ny_x = rot_x(-angle, 0.0, 1.0);
+        double ny_y = rot_y(-angle, 0.0, 1.0);
+
+        double x0 = rot_x(-angle, -width / 2.0, -height / 2.0) + width / 2.0;
+        double y0 = rot_y(-angle, -width / 2.0, -height / 2.0) + height / 2.0;
+
+        // Move
+        for (int y = 0; y < height; y++){
+            double x1 = x0;
+            double y1 = y0;
+            for (int x = 0; x < width; x++){
+                int xx = (int) x1;
+                int yy = (int) y1;
+
+                int col = 0;
+                if (xx < 0 || xx >= width || yy < 0 || yy >= height){
+                    col = 0xFFFF00DC;
+                }else{
+                    col = pixels[xx + yy * width];
+                }
+
+                result[x + y * width] = col;
+                x1 += nx_x;
+                y1 += nx_y;
+            }
+            x0 += ny_x;
+            y0 += ny_y;
+        }
+
+        return result;
+    }
+
+    // Figure out where is the new x
+    private double rot_x(double angle, double x, double y){
+        double res = 0;
+
+        double cos = Math.cos(angle - Math.PI / 2);
+        double sin = Math.sin(angle - Math.PI / 2);
+
+        res = (x * cos) + (y * -sin);
+
+        return res;
+    }
+
+    private double rot_y(double angle, double x, double y){
+        double res = 0;
+
+        double cos = Math.cos(angle - Math.PI / 2);
+        double sin = Math.sin(angle - Math.PI / 2);
+
+        res = (x * sin) + (y * cos);
+
+        return res;
+    }
+
     public void renderMob(int xp, int yp, Mob mob){
         xp -= xOffset;
         yp -= yOffset;
