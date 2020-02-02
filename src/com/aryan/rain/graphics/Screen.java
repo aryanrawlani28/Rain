@@ -22,6 +22,8 @@ public class Screen {
     public int[] tiles = new int[MAP_SIZE*MAP_SIZE];
     public Random random = new Random();
 
+    private final int ALPHA_COL = 0xffff00ff;
+
     public Screen(int width, int height){
         this.width = width;
         this.height = height;
@@ -67,7 +69,8 @@ public class Screen {
             for (int x = 0; x < sprite.getWidth(); x++){
                 int xa = x + xp;
                 if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
-                pixels[xa+ya*width] = sprite.pixels[x+y*sprite.getWidth()];
+                int col = sprite.pixels[x+y*sprite.getWidth()];
+                if (col != ALPHA_COL) pixels[xa+ya*width] = col;
             }
         }
 
@@ -214,5 +217,21 @@ public class Screen {
     public void setOffset(int xOffset, int yOffset){
         this.xOffset = xOffset;
         this.yOffset = yOffset;
+    }
+
+    public void renderTextCharacter(int xp, int yp, Sprite sprite, int color, boolean fixed) {
+        if (fixed) {
+            xp -= xOffset;
+            yp -= yOffset;
+        }
+        for (int y = 0; y < sprite.getHeight(); y++) {
+            int ya = y + yp;
+            for (int x = 0; x < sprite.getWidth(); x++) {
+                int xa = x + xp;
+                if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
+                int col = sprite.pixels[x + y * sprite.getWidth()];
+                if (col != ALPHA_COL && col != 0xff7f007f) pixels[xa + ya * width] = color;
+            }
+        }
     }
 }
