@@ -23,7 +23,7 @@ public class UIButtonListener {
 //        System.out.println("pressed!");
     }
     public void released(UIButton button){
-        button.setColor(0x22cc22);
+        button.setColor(0xcdcdcd);
 //        System.out.println("Released!");
     }
 

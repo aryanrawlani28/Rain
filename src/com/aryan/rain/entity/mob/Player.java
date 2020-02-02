@@ -80,9 +80,16 @@ public class Player extends Mob {
         button = new UIButton(new Vector2i(10, 260), new Vector2i(100, 30), new UIActionListener() {
             @Override
             public void perform() {
+                // Button press events here
                 System.out.println("Button has been pressed");
             }
         });
+//        button.setButtonListener(new UIButtonListener(){
+//            public void pressed(UIButton button){
+//                button.performAction();
+//                button.ignoreNextPress();
+//            }
+//        });
         button.setText("Button");
         panel.addComponent(button);
     }

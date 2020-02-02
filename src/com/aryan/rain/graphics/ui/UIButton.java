@@ -15,6 +15,8 @@ public class UIButton extends UIComponent {
     private boolean inside = false;
     private boolean pressed = false;
 //    private boolean blocked = false;
+    private boolean ignorePressed =false;
+    private boolean ignoreAction = false;
 
     public UIButton(Vector2i pos, Vector2i size, UIActionListener actionListener) {
         super(pos, size);
@@ -57,21 +59,33 @@ public class UIButton extends UIComponent {
     public void update(){
         // animation and stuff
         Rectangle rect = new Rectangle(getAbsolutePosition().x, getAbsolutePosition().y, size.x, size.y);
+        boolean leftMouseButtonDown = Mouse.getButton() == MouseEvent.BUTTON1;
         if (rect.contains(new Point(Mouse.getX(), Mouse.getY()))){
             if (!inside) {
+                if (leftMouseButtonDown){
+                    // entered while pressing
+                    ignorePressed = true;
+                }else{
+                    ignorePressed = false;
+                }
                 buttonListener.entered(this);
                 inside = true;
             }
 
-            if (!pressed && Mouse.getButton() == MouseEvent.BUTTON1){
+            if (!pressed && !ignorePressed && leftMouseButtonDown){
                 // If we've clicked the button
                 pressed = true;
 //                blocked = true;
                 buttonListener.pressed(this);
-            }else if (pressed && Mouse.getButton() == MouseEvent.NOBUTTON){
-                pressed = false;
-                buttonListener.released(this);
-                actionListener.perform();
+            }else if (Mouse.getButton() == MouseEvent.NOBUTTON){
+                if (pressed){
+                    pressed = false;
+                    buttonListener.released(this);
+                    if (!ignoreAction) {
+                        actionListener.perform();
+                    }
+                }
+                ignorePressed = false;
             }
         }else{
             if (inside) {
@@ -89,5 +103,14 @@ public class UIButton extends UIComponent {
         if (label != null){
             label.render(g);
         }
+    }
+
+    public void performAction() {
+        actionListener.perform();
+
+    }
+
+    public void ignoreNextPress() {
+
     }
 }
