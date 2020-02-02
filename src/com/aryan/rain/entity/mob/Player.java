@@ -12,7 +12,9 @@ import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.input.Mouse;
 import com.aryan.rain.util.Vector2i;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
 
 public class Player extends Mob {
 
@@ -92,6 +94,19 @@ public class Player extends Mob {
 //        });
         button.setText("Button");
         panel.addComponent(button);
+
+        // Image button:
+//        try {
+//            UIButton imageButton = new UIButton(new Vector2i(10, 360), ImageIO.read(new File("res/textures/home.png")), new UIActionListener() {
+//                @Override
+//                public void perform() {
+//
+//                }
+//            });
+//            panel.addComponent(imageButton);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
     }
 
     public void update(){

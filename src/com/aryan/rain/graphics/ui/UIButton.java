@@ -5,6 +5,7 @@ import com.aryan.rain.util.Vector2i;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
 public class UIButton extends UIComponent {
 
@@ -12,9 +13,10 @@ public class UIButton extends UIComponent {
     private UIButtonListener buttonListener;
     private UIActionListener actionListener;
 
+    private Image image;
+
     private boolean inside = false;
     private boolean pressed = false;
-//    private boolean blocked = false;
     private boolean ignorePressed =false;
     private boolean ignoreAction = false;
 
@@ -32,6 +34,14 @@ public class UIButton extends UIComponent {
         init();
     }
 
+    public UIButton(Vector2i position, BufferedImage image, UIActionListener actionListener){
+        super(position, new Vector2i(image.getWidth(), image.getHeight()));
+        this.actionListener = actionListener;
+        setImage(image);
+        init();
+
+    }
+
     public void init(){
         setColor(0xaaaaaa);
         buttonListener = new UIButtonListener();
@@ -39,7 +49,9 @@ public class UIButton extends UIComponent {
 
     public void init(UIPanel panel){
         super.init(panel);
-        panel.addComponent(label);
+        if (label != null) {
+            panel.addComponent(label);
+        }
     }
 
     public void setText(String text){
@@ -55,6 +67,9 @@ public class UIButton extends UIComponent {
         this.buttonListener = buttonListener;
     }
 
+    public void setImage(Image image){
+        this.image = image;
+    }
 
     public void update(){
         // animation and stuff
@@ -97,13 +112,25 @@ public class UIButton extends UIComponent {
     }
 
     public void render(Graphics g){
+
+        int x = pos.x + offset.x;
+        int y = pos.y + offset.y;
+
+        if (image != null){
+            g.drawImage(image, x, y, null);
+        }else {
+
+        }
+
         g.setColor(color);
-        g.fillRect(pos.x + offset.x, pos.y + offset.y, size.x, size.y);
+        g.fillRect(x, y, size.x, size.y);
 
         if (label != null){
             label.render(g);
         }
     }
+
+
 
     public void performAction() {
         actionListener.perform();
