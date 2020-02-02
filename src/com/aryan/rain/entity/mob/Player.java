@@ -7,10 +7,7 @@ import com.aryan.rain.graphics.AnimatedSprite;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.Sprite;
 import com.aryan.rain.graphics.SpriteSheet;
-import com.aryan.rain.graphics.ui.UILabel;
-import com.aryan.rain.graphics.ui.UIManager;
-import com.aryan.rain.graphics.ui.UIPanel;
-import com.aryan.rain.graphics.ui.UIProgressBar;
+import com.aryan.rain.graphics.ui.*;
 import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.input.Mouse;
 import com.aryan.rain.util.Vector2i;
@@ -36,6 +33,7 @@ public class Player extends Mob {
 
     private UIManager ui;
     private UIProgressBar uiHealthBar;
+    private UIButton button;
 
 
     @Deprecated
@@ -78,6 +76,10 @@ public class Player extends Mob {
         panel.addComponent(hpLabel);
 
 //        uiHealthBar.setProgress(1.0);
+
+        button = new UIButton(new Vector2i(10, 260), new Vector2i(100, 30));
+        button.setText("Noob");
+        panel.addComponent(button);
     }
 
     public void update(){

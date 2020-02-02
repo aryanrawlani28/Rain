@@ -20,6 +20,7 @@ public class UIPanel extends UIComponent{
     }
 
     public void addComponent(UIComponent component){
+        init(this);
         components.add(component);
     }
 

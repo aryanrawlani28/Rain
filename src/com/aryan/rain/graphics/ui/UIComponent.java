@@ -1,24 +1,32 @@
 package com.aryan.rain.graphics.ui;
 
-import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.util.Vector2i;
 
 import java.awt.*;
 
 public class UIComponent {
 
-    public Vector2i pos, offset;
+    public Vector2i pos, size;
+    protected Vector2i offset;
     public Color color;
-    private Font font;
+
+    protected UIPanel panel;
+
+    public boolean active = true;
 
     UIComponent(Vector2i pos){
         this.pos = pos;
         offset = new Vector2i();
     }
 
-    public UIComponent setFont(Font f){
-        this.font = f;
-        return this;
+    UIComponent(Vector2i pos, Vector2i size){
+        this.pos = pos;
+        this.size = size;
+        offset = new Vector2i();
+    }
+
+    public void init(UIPanel panel){
+        this.panel = panel;
     }
 
     public UIComponent setColor(int c){
