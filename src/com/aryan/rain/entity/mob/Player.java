@@ -1,7 +1,6 @@
 package com.aryan.rain.entity.mob;
 
 import com.aryan.rain.Game;
-import com.aryan.rain.entity.Entity;
 import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.entity.projectile.WizardProjectile;
 import com.aryan.rain.graphics.AnimatedSprite;
@@ -11,12 +10,12 @@ import com.aryan.rain.graphics.SpriteSheet;
 import com.aryan.rain.graphics.ui.UILabel;
 import com.aryan.rain.graphics.ui.UIManager;
 import com.aryan.rain.graphics.ui.UIPanel;
+import com.aryan.rain.graphics.ui.UIProgressBar;
 import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.input.Mouse;
 import com.aryan.rain.util.Vector2i;
 
 import java.awt.*;
-import java.util.List;
 
 public class Player extends Mob {
 
@@ -33,12 +32,13 @@ public class Player extends Mob {
 
     private AnimatedSprite animSprite = down;
 
-    // Projectile p;                   // This projectile is a weapon.
     private int fireRate = 0;
 
     private UIManager ui;
+    private UIProgressBar uiHealthBar;
 
 
+    @Deprecated
     public Player(String name, Keyboard input){
         this.name = name;
         this.input = input;
@@ -52,6 +52,8 @@ public class Player extends Mob {
         this.x = x;
         this.y = y;
 
+        this.health = 100;
+
         this.input = input;
         sprite = Sprite.player_forward;
         fireRate = WizardProjectile.FIRE_RATE;
@@ -64,8 +66,19 @@ public class Player extends Mob {
         nameLabel.setColor(0xbbbbbb);
         nameLabel.dropShadow = true;
         panel.addComponent(nameLabel);
-    }
 
+        uiHealthBar = new UIProgressBar(new Vector2i(10, 215), new Vector2i(220, 20));
+        uiHealthBar.setColor(0x6a6a6a);
+        uiHealthBar.setForegroundColor(0xee3a3a);
+        panel.addComponent(uiHealthBar);
+
+        UILabel hpLabel = new UILabel(new Vector2i(uiHealthBar.pos).add(new Vector2i(2, 16)), "HP");
+        hpLabel.setColor(0xffffff);
+        hpLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
+        panel.addComponent(hpLabel);
+
+//        uiHealthBar.setProgress(1.0);
+    }
 
     public void update(){
         // When press keys, move our player from here. Affects the entity x and y.
@@ -126,8 +139,9 @@ public class Player extends Mob {
         }
     }
 
+    int time = 0;
     private void updateShooting() {
-
+//        double progress = uiHealthBar.getProgress();
         if (Mouse.getButton() == 1 && fireRate <= 0) {
             // atan2 automatically handles div by zero. So no crash. just atan doesn't handle.
             double dx = Mouse.getX() - Game.getWindowWidth()/2;
@@ -136,7 +150,13 @@ public class Player extends Mob {
             shoot(x, y, dir);
 
             fireRate = WizardProjectile.FIRE_RATE;
+//            uiHealthBar.setProgress(progress - 0.1);
+//            uiHealthBar.setProgress((time++ % 100) / 100.0);
         }
+
+        uiHealthBar.setProgress(health / 100.0);
+//        uiHealthBar.setProgress((time++ % 100) / 100.0);
+
 
     }
 

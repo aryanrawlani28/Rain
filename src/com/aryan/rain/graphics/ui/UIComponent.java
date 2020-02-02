@@ -7,7 +7,6 @@ import java.awt.*;
 
 public class UIComponent {
 
-    public int backgroundColor;
     public Vector2i pos, offset;
     public Color color;
     private Font font;

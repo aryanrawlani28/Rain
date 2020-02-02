@@ -59,6 +59,13 @@ public class Vector2i {
         return this;
     }
 
+    public Vector2i add(int val){
+        this.x += val;
+        this.y += val;
+
+        return this;
+    }
+
     public Vector2i subtract(Vector2i vector){
         this.x -= vector.x;
         this.y -= vector.y;

@@ -4,7 +4,6 @@ import com.aryan.rain.entity.Entity;
 import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.entity.projectile.WizardProjectile;
 import com.aryan.rain.graphics.Screen;
-import com.aryan.rain.graphics.Sprite;
 
 public abstract class Mob extends Entity {
     // protected Sprite sprite;
@@ -15,6 +14,8 @@ public abstract class Mob extends Entity {
     }
 
     protected Direction dir;
+
+    protected int health;   // All mobs have health, 0-100
 
     public void move(double xa, double ya){
 
