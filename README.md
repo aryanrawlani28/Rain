@@ -1,4 +1,4 @@
-Rain, a 2D Game.
+# Rain, a 2D Game
 
 ## Table of Contents:
 
