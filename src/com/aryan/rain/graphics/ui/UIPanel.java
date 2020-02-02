@@ -8,14 +8,12 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UIPanel {
+public class UIPanel extends UIComponent{
     private List<UIComponent> components = new ArrayList<UIComponent>();
-    private Vector2i pos, size;
-    private Color color;
-
-    private Sprite sprite;
+    private Vector2i size;
 
     public UIPanel(Vector2i pos, Vector2i size){
+        super(pos);
         this.pos = pos;
         color = new Color(0xcacaca);
         this.size = size;

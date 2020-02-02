@@ -16,8 +16,8 @@ import java.awt.image.DataBufferInt;
 
 public class Game extends Canvas implements Runnable{
 
-    private static int width = 300;
-    private static int height = width / 16 * 9;      // Width: 168
+    private static int width = 300 - 80;
+    private static int height = 168;      // Width: 168
     private static int scale = 3;
 
     public static String title = "Rain";
@@ -46,7 +46,7 @@ public class Game extends Canvas implements Runnable{
 
 
     public Game(){
-        Dimension size = new Dimension(width*scale, height*scale);
+        Dimension size = new Dimension(width*scale + 80*3, height*scale);
         setPreferredSize(size);
         screen = new Screen(width, height);
         uiManager = new UIManager();
@@ -58,7 +58,7 @@ public class Game extends Canvas implements Runnable{
         level = Level.Spawn;
 
         // TileCoordinate playerSpawn = new TileCoordinate(20, 59);         // TODO: Issue #1 : Does not work
-        player = new Player(20*16, 59*16, key);
+        player = new Player("Aryan", 20*16, 59*16, key);
 
         level.add(player);
 
@@ -163,7 +163,7 @@ public class Game extends Canvas implements Runnable{
 
         g.setColor(Color.BLACK);
         g.fillRect(0,0,getWidth(), getHeight());
-        g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
+        g.drawImage(img, 0, 0, width*scale, height*scale, null);
 
         g.fillRect(Mouse.getX()-16, Mouse.getY()-16, 32,32);
 
