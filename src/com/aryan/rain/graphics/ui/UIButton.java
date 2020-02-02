@@ -4,6 +4,7 @@ import com.aryan.rain.input.Mouse;
 import com.aryan.rain.util.Vector2i;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 public class UIButton extends UIComponent {
 
@@ -12,6 +13,8 @@ public class UIButton extends UIComponent {
     private UIActionListener actionListener;
 
     private boolean inside = false;
+    private boolean pressed = false;
+//    private boolean blocked = false;
 
     public UIButton(Vector2i pos, Vector2i size, UIActionListener actionListener) {
         super(pos, size);
@@ -46,6 +49,10 @@ public class UIButton extends UIComponent {
     }
 
 
+    public void setButtonListener(UIButtonListener buttonListener){
+        this.buttonListener = buttonListener;
+    }
+
 
     public void update(){
         // animation and stuff
@@ -55,9 +62,21 @@ public class UIButton extends UIComponent {
                 buttonListener.entered(this);
                 inside = true;
             }
+
+            if (!pressed && Mouse.getButton() == MouseEvent.BUTTON1){
+                // If we've clicked the button
+                pressed = true;
+//                blocked = true;
+                buttonListener.pressed(this);
+            }else if (pressed && Mouse.getButton() == MouseEvent.NOBUTTON){
+                pressed = false;
+                buttonListener.released(this);
+                actionListener.perform();
+            }
         }else{
             if (inside) {
                 buttonListener.exited(this);
+                pressed = false;
             }
             inside = false;
         }
