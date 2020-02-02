@@ -4,21 +4,24 @@ import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.Sprite;
 import com.aryan.rain.util.Vector2i;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UIPanel {
     private List<UIComponent> components = new ArrayList<UIComponent>();
-    private Vector2i pos;
+    private Vector2i pos, size;
+    private Color color;
 
     private Sprite sprite;
 
-    public UIPanel(Vector2i pos){
+    public UIPanel(Vector2i pos, Vector2i size){
         this.pos = pos;
-        sprite = new Sprite(80, 168, 0xcacaca);
+        color = new Color(0xcacaca);
+        this.size = size;
     }
 
-    public void addCompnent(UIComponent component){
+    public void addComponent(UIComponent component){
         components.add(component);
     }
 
@@ -29,10 +32,11 @@ public class UIPanel {
         }
     }
 
-    public void render(Screen screen){
-        screen.renderSprite(pos.x, pos.y, sprite, false);
+    public void render(Graphics g){
+        g.setColor(color);
+        g.fillRect(pos.x, pos.y, size.x, size.y);
         for (UIComponent component : components){
-            component.render(screen);
+            component.render(g);
         }
     }
 }

@@ -53,9 +53,9 @@ public class Player extends Mob {
         fireRate = WizardProjectile.FIRE_RATE;
 
         ui = Game.getUIManager();
-        UIPanel panel = new UIPanel(new Vector2i(300-80, 0));
+        UIPanel panel = new UIPanel(new Vector2i((300-80)*3, 0), new Vector2i(80*3, 168*3));
         ui.addPanel(panel);
-        panel.addCompnent(new UILabel(new Vector2i(-10,2), "Hello"));
+        panel.addComponent(new UILabel(new Vector2i(10,50), "Hello").setColor(0));
     }
 
 

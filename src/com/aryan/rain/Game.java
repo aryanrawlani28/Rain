@@ -151,7 +151,7 @@ public class Game extends Canvas implements Runnable{
         double yScroll = player.getY() - screen.height / 2;
 
         level.render((int)xScroll, (int)yScroll, screen);
-        uiManager.render(screen);
+
 
 //        font.render(50, 50, "gamey pjs", screen);
 
@@ -167,6 +167,7 @@ public class Game extends Canvas implements Runnable{
 
         g.fillRect(Mouse.getX()-16, Mouse.getY()-16, 32,32);
 
+        uiManager.render(g);
 
         g.dispose();
 
