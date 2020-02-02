@@ -10,11 +10,14 @@ import com.aryan.rain.graphics.SpriteSheet;
 import com.aryan.rain.graphics.ui.*;
 import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.input.Mouse;
+import com.aryan.rain.util.ImageUtils;
 import com.aryan.rain.util.Vector2i;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 public class Player extends Mob {
 
@@ -23,6 +26,8 @@ public class Player extends Mob {
     private Sprite sprite;
     private int anim = 0;
     private boolean walking = false;
+
+    private BufferedImage image;
 
     private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 3);
     private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 32, 32, 3);
@@ -96,17 +101,37 @@ public class Player extends Mob {
         panel.addComponent(button);
 
         // Image button:
-//        try {
-//            UIButton imageButton = new UIButton(new Vector2i(10, 360), ImageIO.read(new File("res/textures/home.png")), new UIActionListener() {
-//                @Override
-//                public void perform() {
+        try {
+            image = ImageIO.read(new File("res/textures/home.png"));
+            // System.out.println(image.getType());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+//        UI Button Funtionality:
+//        UIButton imageButton = new UIButton(new Vector2i(10, 360), image, new UIActionListener() {
+//            public void perform() {
+//                // System.exit(0);
+//            }
+//        });
+//        imageButton.setButtonListener(new UIButtonListener() {
+//            public void entered(UIButton button) {
+//                button.setImage(ImageUtils.changeBrightness(image, -50));
+//            }
 //
-//                }
-//            });
-//            panel.addComponent(imageButton);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+//            public void exited(UIButton button) {
+//                button.setImage(image);
+//            }
+//
+//            public void pressed(UIButton button) {
+//                button.setImage(ImageUtils.changeBrightness(image, 50));
+//            }
+//
+//            public void released(UIButton button) {
+//                button.setImage(image);
+//            }
+//        });
+//        panel.addComponent(imageButton);
     }
 
     public void update(){
