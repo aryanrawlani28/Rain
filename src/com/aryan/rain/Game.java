@@ -2,6 +2,7 @@ package com.aryan.rain;
 
 import com.aryan.rain.entity.mob.Player;
 import com.aryan.rain.graphics.Screen;
+import com.aryan.rain.graphics.ui.UIManager;
 import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.input.Mouse;
 import com.aryan.rain.level.Level;
@@ -35,6 +36,9 @@ public class Game extends Canvas implements Runnable{
 
     private boolean running = false;
 
+//    private UIManager uiManager;
+    private static UIManager uiManager;
+
     private Screen screen;
 
     private BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -45,6 +49,7 @@ public class Game extends Canvas implements Runnable{
         Dimension size = new Dimension(width*scale, height*scale);
         setPreferredSize(size);
         screen = new Screen(width, height);
+        uiManager = new UIManager();
 
         frame = new JFrame();
 
@@ -72,6 +77,10 @@ public class Game extends Canvas implements Runnable{
 
     public static int getWindowHeight(){
         return height * scale;
+    }
+
+    public static UIManager getUIManager(){
+        return uiManager;
     }
 
     private synchronized void start(){
@@ -127,6 +136,7 @@ public class Game extends Canvas implements Runnable{
     public void update(){
         key.update();
         level.update();
+        uiManager.update();
     }
 
     public void render(){
@@ -141,6 +151,7 @@ public class Game extends Canvas implements Runnable{
         double yScroll = player.getY() - screen.height / 2;
 
         level.render((int)xScroll, (int)yScroll, screen);
+        uiManager.render(screen);
 
 //        font.render(50, 50, "gamey pjs", screen);
 

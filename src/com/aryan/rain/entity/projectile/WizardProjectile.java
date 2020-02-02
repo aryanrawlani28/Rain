@@ -15,8 +15,9 @@ public class WizardProjectile extends Projectile{
         speed = 2;
         damage = 20;
 
-//        sprite = Sprite.projectile_wizard;
-        sprite = Sprite.rotate(Sprite.projectile_arrow, angle);
+        sprite = Sprite.projectile_wizard;
+        sprite = Sprite.rotate(Sprite.projectile_wizard, angle);
+//        sprite = Sprite.rotate(Sprite.projectile_arrow, angle);
         nx = speed * Math.cos(angle);
         ny = speed * Math.sin(angle);
     }
@@ -33,10 +34,11 @@ public class WizardProjectile extends Projectile{
             move();
         }
 
-        time++;
-        if (time % 6 == 0){
-            sprite = Sprite.rotate(sprite, Math.PI / 20.0);
-        }
+        // Adds rotation every specific period:
+//        time++;
+//        if (time % 6 == 0){
+//            sprite = Sprite.rotate(sprite, Math.PI / 20.0);
+//        }
     }
 
 

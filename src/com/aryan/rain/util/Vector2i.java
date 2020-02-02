@@ -3,7 +3,7 @@ package com.aryan.rain.util;
 // A vector, with 2 coords, type of data: "i -> integer". For floats, Vector2f, etc
 public class Vector2i {
 
-    private int x, y;
+    public int x, y;
 
     /////////////////////////////////////// GETTERS ///////////////////////////////////////
 

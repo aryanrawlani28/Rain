@@ -8,8 +8,12 @@ import com.aryan.rain.graphics.AnimatedSprite;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.Sprite;
 import com.aryan.rain.graphics.SpriteSheet;
+import com.aryan.rain.graphics.ui.UILabel;
+import com.aryan.rain.graphics.ui.UIManager;
+import com.aryan.rain.graphics.ui.UIPanel;
 import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.input.Mouse;
+import com.aryan.rain.util.Vector2i;
 
 import java.util.List;
 
@@ -30,6 +34,8 @@ public class Player extends Mob {
     // Projectile p;                   // This projectile is a weapon.
     private int fireRate = 0;
 
+    private UIManager ui;
+
 
     public Player(Keyboard input){
         this.input = input;
@@ -45,6 +51,11 @@ public class Player extends Mob {
         this.input = input;
         sprite = Sprite.player_forward;
         fireRate = WizardProjectile.FIRE_RATE;
+
+        ui = Game.getUIManager();
+        UIPanel panel = new UIPanel(new Vector2i(300-80, 0));
+        ui.addPanel(panel);
+        panel.addCompnent(new UILabel(new Vector2i(-10,2), "Hello"));
     }
 
 
