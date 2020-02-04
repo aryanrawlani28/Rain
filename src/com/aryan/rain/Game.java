@@ -9,6 +9,7 @@ import com.aryan.rain.graphics.ui.UIManager;
 import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.input.Mouse;
 import com.aryan.rain.level.Level;
+import com.aryan.rain.level.TileCoordinate;
 
 import java.util.List;
 import javax.swing.*;
@@ -61,8 +62,8 @@ public class Game extends Canvas implements Runnable, EventListener {
         level = Level.Spawn;
         addLayer(level);
 
-        // TileCoordinate playerSpawn = new TileCoordinate(20, 59);         // TODO: Issue #1 : Does not work
-        player = new Player("Aryan", 20*16, 59*16, key);
+         TileCoordinate playerSpawn = new TileCoordinate(20, 59);         // TODO: Issue #1 : Does not work
+        player = new Player("Aryan", playerSpawn.x(), playerSpawn.y(), key);
 
         level.add(player);
 

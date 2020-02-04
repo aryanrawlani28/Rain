@@ -170,7 +170,7 @@ public class Player extends Mob implements EventListener {
             return true;        // Means we've handled the event.
         }
 
-        uiHealthBar.setProgress(health / 100.0);
+
 //        uiHealthBar.setProgress((time++ % 100) / 100.0);
 
 
@@ -227,6 +227,7 @@ public class Player extends Mob implements EventListener {
             walking = false;
         }
 
+        uiHealthBar.setProgress(health / 100.0);
         clear();
         updateShooting();
     }
