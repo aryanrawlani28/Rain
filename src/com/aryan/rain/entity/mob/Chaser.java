@@ -37,10 +37,10 @@ public class Chaser extends Mob{
         xa = 0;
         ya = 0;
 
-        List<Player> players = level.getPlayers(this, 50);
+        List<Mob> players = level.getPlayers(this, 50);
 
         if (players.size() > 0) {
-            Player player = players.get(0);
+            Mob player = players.get(0);
             if (x < player.getX()) xa += speed;
             if (x > player.getX()) xa -= speed;
             if (y < player.getY()) ya += speed;

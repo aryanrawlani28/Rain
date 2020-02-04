@@ -4,6 +4,7 @@ package com.aryan.rain.level;
 // L2: Map level
 
 import com.aryan.rain.entity.Entity;
+import com.aryan.rain.entity.mob.Mob;
 import com.aryan.rain.entity.mob.Player;
 import com.aryan.rain.entity.particle.Particle;
 import com.aryan.rain.entity.projectile.Projectile;
@@ -28,7 +29,9 @@ public class Level extends Layer {
     private List<Entity> entities = new ArrayList<Entity>();
     private List<Projectile> projectiles = new ArrayList<Projectile>();
     private List<Particle> particles = new ArrayList<Particle>();
-    private List<Player> players = new ArrayList<Player>();
+//    private List<Player> players = new ArrayList<Player>();   // Removed for #125, preparing multiplayer.
+
+    private List<Mob> players = new ArrayList<Mob>();
 
     public static Level Spawn = new SpawnLevel("res/levels/spawn_level.png");
 
@@ -183,9 +186,14 @@ public class Level extends Layer {
         }
     }
 
+    public void addPlayer(Mob player){
+        player.init(this);
+        players.add(player);
+    }
+
 
     @Deprecated
-    public List<Player> getPlayers(){
+    public List<Mob> getPlayers(){
 //        for (int i = 0; i < entities.size(); i++) {
 //            if (entities.get(i) instanceof Player) {
 //                return (Player) entities.get(i);
@@ -196,12 +204,16 @@ public class Level extends Layer {
         return players;
     }
 
-    public Player getPlayerAt(int i){
+//    public Player getPlayerAt(int i){
+//        return players.get(i);
+//    }
+
+    public Mob getPlayerAt(int i){
         return players.get(i);
     }
 
     public Player getClientPlayer(){
-        return players.get(0);
+        return (Player) players.get(0);
     }
 
 
@@ -353,15 +365,15 @@ public class Level extends Layer {
         return result;
     }
 
-    public List<Player> getPlayers(Entity e, int radius){
+    public List<Mob> getPlayers(Entity e, int radius){      // Changed to Mob for #125
 
 //        List<Entity> entities = getEntities(e, radius);
-        List<Player> result = new ArrayList<Player>();
+        List<Mob> result = new ArrayList<Mob>();            // Changed to Mob for #125
         int ex = (int) e.getX();
         int ey = (int) e.getY();
 
         for (int i=0; i<players.size(); i++){
-            Player player = players.get(i);
+            Mob player = players.get(i);                    // Changed to Mob for #125
             int x = (int) player.getX();
             int y = (int) player.getY();
 

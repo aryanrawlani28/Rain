@@ -215,6 +215,24 @@ public class Screen {
 
     }
 
+    public void fillRect(int xp, int yp, int width, int height, int color, boolean fixed){
+        if (fixed){
+            xp -= xOffset;
+            yp -= yOffset;
+        }
+
+        for (int y=0; y< height; y++){
+            int y0 = yp+y;
+            if (y < 0 || y0 >= this.height) continue;
+            for (int x=0; x < width; x++){
+                int x0 = xp + x;
+                if (x < 0 || x0 >= this.width) continue;
+                pixels[x0+y0 * this.width] = color;
+            }
+        }
+    }
+
+
     public void setOffset(int xOffset, int yOffset){
         this.xOffset = xOffset;
         this.yOffset = yOffset;
