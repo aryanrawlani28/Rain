@@ -9,7 +9,14 @@
 
 
 ## Introduction: <a name="intro"> </a>
-Rain is a 2D Game written in pure java, without any external dependencies or engines. The orignal author of this project is [Yan Chernikov aka TheCherno](https://www.youtube.com/user/TheChernoProject). More about author in section 4.
+Rain is a 2D Game written in pure java, without any external dependencies or engines. More about the series and the orignal author [here](#about).
+
+This is my code-along version, in which I've written the engine and game while following along the series. There are a few things I've done differently, as a matter of preference, but it's largely the same.
+
+If you find the series interesting and want a guide alongside every video and see changes, the commits have a tag attached to them in form of 
+#(video_number), 
+
+> (PS - This started from ~#20.
 
 It is quite similiar, or atleast developed by keeping "Realm of the Mad God" in mind and thus, you'll see a lot of similiarities.
 
@@ -49,10 +56,10 @@ If you simply wish to mess around and check out the project, these are some inte
  1. Clone the repo
  2. Use an IDE preferably for rapid building and debugging.
 
-The codebase is also heavily documentated with experimental things explored along the series, and have been commented out. Explore these simply by uncommenting and seeing the changes.
+The codebase is also heavily documentated with experimental things explored along the series, and have been commented out. Explore these simply by uncommenting and seeing the changes. You'll also likely see comments and explainations a lot, which were used as a reference while I followed along the series.
 
 ***Players:***
-4 different types of players exist in Rain.
+5 different types of players exist in Rain.
 
 - Player: The main protagonist.
  - Dummy: Moves around randomly
@@ -99,14 +106,8 @@ Add custom designed levels and tiles in this package.
 The orignal author of this project is Yan Chernikov, aka TheCherno on [YouTube](https://www.youtube.com/user/TheChernoProject).
 You can find along his series of videos on this topic [here](https://www.youtube.com/playlist?list=PLlrATfBNZ98eOOCk2fOFg7Qg5yoQfFAdf). 
 
-I've found the series interesting and this project is a ***code-along with the purpose of learning*** along with all the videos.
+This version is my implementation as I followed along the series.
 
-If you find the series interesting and want a guide alongside every video and see changes, the commits have a tag attached to them in form of 
-#(video_number), 
-
-> (PS - This started from ~#20.
-
-
-**<br />You're free to use the code in any way you see fit, but please consider including the orignal author's name and links, if you're reusing the code here.**
+**<br />You're free to use the code in any way you see fit, since the videos are free, but please consider including the orignal author's name and links, if you're reusing the code in any way.**
 
  
