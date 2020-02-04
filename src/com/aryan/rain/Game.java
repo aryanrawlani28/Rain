@@ -30,7 +30,7 @@ public class Game extends Canvas implements Runnable{
 
     private Player player;
 
-    private Font font;
+//    private Font font;
 
     private Thread thread;
 

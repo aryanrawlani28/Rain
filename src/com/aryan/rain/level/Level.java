@@ -8,13 +8,14 @@ import com.aryan.rain.entity.mob.Player;
 import com.aryan.rain.entity.particle.Particle;
 import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.graphics.Screen;
+import com.aryan.rain.graphics.layers.Layer;
 import com.aryan.rain.level.tile.Tile;
 import com.aryan.rain.util.Vector2i;
 
 import java.util.*;
 
 // Manages which tiles need to be rendered.
-public class Level {
+public class Level extends Layer {
 
     protected int width, height;                    // Primarily for L1
     protected int[] tilesInt;                       // Eg tiles[1] is grass, 2 is stone, etc..
