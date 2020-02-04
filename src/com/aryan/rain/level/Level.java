@@ -7,6 +7,7 @@ import com.aryan.rain.entity.Entity;
 import com.aryan.rain.entity.mob.Player;
 import com.aryan.rain.entity.particle.Particle;
 import com.aryan.rain.entity.projectile.Projectile;
+import com.aryan.rain.events.Event;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.layers.Layer;
 import com.aryan.rain.level.tile.Tile;
@@ -21,6 +22,8 @@ public class Level extends Layer {
     protected int[] tilesInt;                       // Eg tiles[1] is grass, 2 is stone, etc..
 
     protected int[] tiles;  // Contains all of levels tiles. Since one level loaded at a time, this works well.
+
+    private int xScroll, yScroll;
 
     private List<Entity> entities = new ArrayList<Entity>();
     private List<Projectile> projectiles = new ArrayList<Projectile>();
@@ -97,6 +100,11 @@ public class Level extends Layer {
         remove();
     }
 
+    public void onEvent(Event event){
+        getClientPlayer().onEvent(event);
+    }
+
+
     private void remove(){
 
     }
@@ -120,8 +128,13 @@ public class Level extends Layer {
         return false;
     }
 
+    public void setScroll(int xScroll, int yScroll){
+        this.xScroll = xScroll;
+        this.yScroll = yScroll;
+    }
+
     //this method and vars define the render region
-    public void render(int xScroll, int yScroll, Screen screen){
+    public void render(Screen screen){
         screen.setOffset(xScroll, yScroll);
 
         // as fast as possible. probably empty here.

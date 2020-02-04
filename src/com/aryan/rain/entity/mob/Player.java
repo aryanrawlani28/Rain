@@ -3,6 +3,11 @@ package com.aryan.rain.entity.mob;
 import com.aryan.rain.Game;
 import com.aryan.rain.entity.projectile.Projectile;
 import com.aryan.rain.entity.projectile.WizardProjectile;
+import com.aryan.rain.events.Event;
+import com.aryan.rain.events.EventDispatcher;
+import com.aryan.rain.events.EventListener;
+import com.aryan.rain.events.types.MousePressedEvent;
+import com.aryan.rain.events.types.MouseReleasedEvent;
 import com.aryan.rain.graphics.AnimatedSprite;
 import com.aryan.rain.graphics.Screen;
 import com.aryan.rain.graphics.Sprite;
@@ -10,22 +15,24 @@ import com.aryan.rain.graphics.SpriteSheet;
 import com.aryan.rain.graphics.ui.*;
 import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.input.Mouse;
-import com.aryan.rain.util.ImageUtils;
 import com.aryan.rain.util.Vector2i;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Player extends Mob {
+public class Player extends Mob implements EventListener {
 
     private String name;
     private Keyboard input;
     private Sprite sprite;
     private int anim = 0;
     private boolean walking = false;
+
+    private boolean shooting = false;
 
     private BufferedImage image;
 
@@ -134,6 +141,50 @@ public class Player extends Mob {
 //        panel.addComponent(imageButton);
     }
 
+    public void onEvent(Event event){
+        EventDispatcher dispatcher = new EventDispatcher(event);
+
+        dispatcher.dispatch(Event.Type.MOUSE_PRESSED, (Event e) -> onMousePressed((MousePressedEvent)e));
+        dispatcher.dispatch(Event.Type.MOUSE_RELEASED, (Event e) -> onMouseReleased((MouseReleasedEvent)e));
+    }
+
+    public boolean onMousePressed(MousePressedEvent e){
+        if (Mouse.getX() > 660) return false;         // Will not shoot if press on the UI
+
+//        double progress = uiHealthBar.getProgress();
+        if (Mouse.getButton() == MouseEvent.BUTTON1) {
+            shooting = true;
+
+
+//            // atan2 automatically handles div by zero. So no crash. just atan doesn't handle.
+//            double dx = Mouse.getX() - Game.getWindowWidth()/2;
+//            double dy = Mouse.getY() - Game.getWindowHeight()/2;
+//            double dir = Math.atan2(dy, dx);
+//            shoot(x, y, dir);
+//
+//            fireRate = WizardProjectile.FIRE_RATE;
+
+
+//            uiHealthBar.setProgress(progress - 0.1);
+//            uiHealthBar.setProgress((time++ % 100) / 100.0);
+            return true;        // Means we've handled the event.
+        }
+
+        uiHealthBar.setProgress(health / 100.0);
+//        uiHealthBar.setProgress((time++ % 100) / 100.0);
+
+
+        return false;
+    }
+
+    public boolean onMouseReleased(MouseReleasedEvent e){
+        if (Mouse.getButton() == MouseEvent.NOBUTTON){
+            shooting = false;
+            return true;
+        }
+        return false;
+    }
+
     public void update(){
         // When press keys, move our player from here. Affects the entity x and y.
         // If user presses up+down at same time, this will effectively cancel movement and player will not move.
@@ -180,6 +231,17 @@ public class Player extends Mob {
         updateShooting();
     }
 
+    private void updateShooting(){
+        if (!shooting || fireRate > 0) return;
+        // atan2 automatically handles div by zero. So no crash. just atan doesn't handle.
+        double dx = Mouse.getX() - Game.getWindowWidth()/2;
+        double dy = Mouse.getY() - Game.getWindowHeight()/2;
+        double dir = Math.atan2(dy, dx);
+        shoot(x, y, dir);
+
+        fireRate = WizardProjectile.FIRE_RATE;
+    }
+
     public String getName(){
         return name;
     }
@@ -194,25 +256,9 @@ public class Player extends Mob {
     }
 
     int time = 0;
-    private void updateShooting() {
-//        double progress = uiHealthBar.getProgress();
-        if (Mouse.getButton() == 1 && fireRate <= 0) {
-            // atan2 automatically handles div by zero. So no crash. just atan doesn't handle.
-            double dx = Mouse.getX() - Game.getWindowWidth()/2;
-            double dy = Mouse.getY() - Game.getWindowHeight()/2;
-            double dir = Math.atan2(dy, dx);
-            shoot(x, y, dir);
-
-            fireRate = WizardProjectile.FIRE_RATE;
-//            uiHealthBar.setProgress(progress - 0.1);
-//            uiHealthBar.setProgress((time++ % 100) / 100.0);
-        }
-
-        uiHealthBar.setProgress(health / 100.0);
-//        uiHealthBar.setProgress((time++ % 100) / 100.0);
-
-
-    }
+//    private void updateShooting() {
+//
+//    }
 
     // You don't wanna center it always to the player.
     public void render(Screen screen){

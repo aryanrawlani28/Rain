@@ -1,20 +1,24 @@
 package com.aryan.rain;
 
 import com.aryan.rain.entity.mob.Player;
+import com.aryan.rain.events.Event;
+import com.aryan.rain.events.EventListener;
 import com.aryan.rain.graphics.Screen;
+import com.aryan.rain.graphics.layers.Layer;
 import com.aryan.rain.graphics.ui.UIManager;
 import com.aryan.rain.input.Keyboard;
 import com.aryan.rain.input.Mouse;
 import com.aryan.rain.level.Level;
-import com.aryan.rain.graphics.Font;
 
+import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.util.ArrayList;
 
-public class Game extends Canvas implements Runnable{
+public class Game extends Canvas implements Runnable, EventListener {
 
     private static int width = 300 - 80;
     private static int height = 168;      // Width: 168
@@ -30,19 +34,18 @@ public class Game extends Canvas implements Runnable{
 
     private Player player;
 
-//    private Font font;
-
     private Thread thread;
 
     private boolean running = false;
 
-//    private UIManager uiManager;
     private static UIManager uiManager;
 
     private Screen screen;
 
     private BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     private int[] pixels = ((DataBufferInt)img.getRaster().getDataBuffer()).getData();
+
+    private List<Layer> layerStack = new ArrayList<Layer>();
 
 
     public Game(){
@@ -56,17 +59,16 @@ public class Game extends Canvas implements Runnable{
         key = new Keyboard();
 
         level = Level.Spawn;
+        addLayer(level);
 
         // TileCoordinate playerSpawn = new TileCoordinate(20, 59);         // TODO: Issue #1 : Does not work
         player = new Player("Aryan", 20*16, 59*16, key);
 
         level.add(player);
 
-//        font = new Font();
-
         addKeyListener(key);
 
-        Mouse mouse = new Mouse();
+        Mouse mouse = new Mouse(this);
         addMouseListener(mouse);
         addMouseMotionListener(mouse);
     }
@@ -81,6 +83,10 @@ public class Game extends Canvas implements Runnable{
 
     public static UIManager getUIManager(){
         return uiManager;
+    }
+
+    public void addLayer(Layer layer){
+        layerStack.add(layer);
     }
 
     private synchronized void start(){
@@ -133,10 +139,21 @@ public class Game extends Canvas implements Runnable{
         }
     }
 
+    public void onEvent(Event event){
+        for (int i= layerStack.size() - 1; i >= 0; i--){
+            layerStack.get(i).onEvent(event);
+        }
+    }
+
     public void update(){
         key.update();
-        level.update();
+//        level.update();
         uiManager.update();
+
+        // Update layers here:
+        for (int i=0; i < layerStack.size(); i++){
+            layerStack.get(i).update();
+        }
     }
 
     public void render(){
@@ -150,10 +167,13 @@ public class Game extends Canvas implements Runnable{
         double xScroll = player.getX() - screen.width / 2;
         double yScroll = player.getY() - screen.height / 2;
 
-        level.render((int)xScroll, (int)yScroll, screen);
+        level.setScroll((int)xScroll, (int)yScroll);
+//        level.render(screen); -> Shouldn't happen anymore since Layers.
 
-
-//        font.render(50, 50, "gamey pjs", screen);
+        // Render layers here:
+        for (int i=0; i < layerStack.size(); i++){
+            layerStack.get(i).render(screen);
+        }
 
         for(int i=0; i<pixels.length; i++){
             pixels[i] = screen.pixels[i];
