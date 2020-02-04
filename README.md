@@ -3,9 +3,10 @@
 ## Table of Contents:
 
  1. [Introduction](#intro)
- 2. [List of topics covered in series](#topic)
- 3. [Mess around with Rain and get started](#messaround)
- 4. [About Author](#about)
+ 2. [Screens](#screens)
+ 3. [List of topics covered in series](#topic)
+ 4. [Mess around with Rain and get started](#messaround)
+ 5. [About Author](#about)
 
 
 ## Introduction: <a name="intro"> </a>
@@ -18,7 +19,7 @@ If you find the series interesting and want a guide alongside every video and se
 
 > (PS - This started from ~#20.
 
-It is quite similiar, or atleast developed by keeping "Realm of the Mad God" in mind and thus, you'll see a lot of similiarities.
+It is quite similiar, or atleast developed by keeping "Realm of the Mad God" in mind and thus, you'll see a lot of similiarities. This is not a complete game, but rather a project to learn and try many important game programming aspects.
 
 Only requirement for Rain to run on your system is to have Java installed.
 
@@ -26,6 +27,12 @@ Only requirement for Rain to run on your system is to have Java installed.
 > is highly backwards compatible and you should be able to run even on
 > newer versions.
 
+
+## Screens:<a name="screens"> </a>
+![particles](screens/particles.png)
+![shooter](screens/shooter.png)
+![shooting](screens/shooting.png)
+![a*](screens/star.png)
 
 
 ## General topics covered:<a name="topic"> </a>
