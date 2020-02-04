@@ -15,7 +15,8 @@ public class UILabel extends UIComponent {
         super(pos);
         font = new Font("Verdana", Font.PLAIN, 32);
         this.text = text;
-        this.color = new Color(0xffaaff);
+//        this.color = new Color(0xffaaff);
+        this.color = new Color(0xbccff);
     }
 
     public UILabel setFont(Font font){

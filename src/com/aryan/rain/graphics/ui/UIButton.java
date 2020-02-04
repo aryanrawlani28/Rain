@@ -24,8 +24,8 @@ public class UIButton extends UIComponent {
         super(pos, size);
         this.actionListener = actionListener;
         Vector2i lp = new Vector2i(pos);
-        lp.x += 4;
-        lp.y += size.y - 2;
+        lp.x += 660;
+        lp.y += size.y;
 
         label = new UILabel(lp, "");
         label.setColor(0x444444);

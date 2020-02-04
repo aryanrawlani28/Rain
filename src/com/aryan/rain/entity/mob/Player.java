@@ -84,7 +84,7 @@ public class Player extends Mob {
 
 //        uiHealthBar.setProgress(1.0);
 
-        button = new UIButton(new Vector2i(10, 260), new Vector2i(100, 30), new UIActionListener() {
+        button = new UIButton(new Vector2i(10, 260), new Vector2i(120, 30), new UIActionListener() {
             @Override
             public void perform() {
                 // Button press events here
